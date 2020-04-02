@@ -7,12 +7,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.text.SimpleDateFormat
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private val TAG = MainActivity::class.java.simpleName
     private val VISOR_KEY = "visor"
     private val HISTORIC_KEY = "historic"
+    private val LIST_HISTORIC_KEY = "list_historic"
+
     private var listaOperacoes = arrayListOf("1+1=2")
+    private lateinit var historyAdapter: HistoryAdapter
 
     /* Funcoes onClick */
     private fun onClickSymbol(symbol: String) {
@@ -29,8 +32,8 @@ class MainActivity : AppCompatActivity() {
     }
     private fun onClickOperation(operation: String) {
 
-        val padrao = "hh:mm:ss"
-        val simpleDateFormat = SimpleDateFormat(padrao)
+        // val padrao = "hh:mm:ss"
+        // val simpleDateFormat = SimpleDateFormat(padrao)
 
         if (operation == "del") {
             Log.i(TAG, "Click no botão DEL")
@@ -47,17 +50,19 @@ class MainActivity : AppCompatActivity() {
             text_visor.append(operation)
         }
 
-        //Toast.makeText(this, "Metodo: button_$operation\nHora: ${simpleDateFormat.format(Date())}", Toast.LENGTH_SHORT).show()
+        // Toast.makeText(this, "Metodo: button_$operation\nHora: ${simpleDateFormat.format(Date())}", Toast.LENGTH_SHORT).show()
     }
     private fun onClickEquals() {
         Log.i(TAG, "Click no botão =")
         val expression = ExpressionBuilder(text_visor.text.toString()).build()
         val operacao = text_visor.text
         text_visor.text = expression.evaluate().toString()
+
         listaOperacoes.add("$operacao = ${text_visor.text}")
-        list_historic?.adapter = HistoryAdapter(this,
-            R.layout.item_expression, listaOperacoes)
+        historyAdapter = HistoryAdapter(this, R.layout.item_expression, listaOperacoes)
+        list_historic?.adapter = historyAdapter
         historic?.text = listaOperacoes[listaOperacoes.size -1]
+
         Log.i(TAG, "O resultado da expressão é ${text_visor.text}")
     }
 
@@ -65,8 +70,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "o método onCreate foi invocado")
         setContentView(R.layout.activity_main)
-        list_historic?.adapter = HistoryAdapter(this,
-            R.layout.item_expression, listaOperacoes)
+        list_historic?.adapter = historyAdapter
 
         /* Funcionalidade Botões Numericos */
         button_00?.setOnClickListener {
@@ -141,6 +145,7 @@ class MainActivity : AppCompatActivity() {
         outState.run {
             putString(VISOR_KEY, text_visor.text.toString())
             putString(HISTORIC_KEY, historic?.text.toString())
+            // putStringArrayList(LIST_HISTORIC_KEY, listaOperacoes)
         }
         super.onSaveInstanceState(outState)
     }
