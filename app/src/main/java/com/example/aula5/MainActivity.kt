@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity(){
 
     private val TAG = MainActivity::class.java.simpleName
     private val VISOR_KEY = "visor"
-    private val HISTORIC_KEY = "historic"
+    private val HISTORIC_KEqY = "historic"
     private val LIST_HISTORIC_KEY = "list_historic"
 
     private var listaOperacoes = arrayListOf("1+1=2")
@@ -138,13 +138,13 @@ class MainActivity : AppCompatActivity(){
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         text_visor.text = savedInstanceState.getString(VISOR_KEY)
-        historic?.text = savedInstanceState.getString(HISTORIC_KEY)
+        //historic?.text = savedInstanceState.getString(HISTORIC_KEY)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.run {
             putString(VISOR_KEY, text_visor.text.toString())
-            putString(HISTORIC_KEY, historic?.text.toString())
+            //putString(HISTORIC_KEY, historic?.text.toString())
             // putStringArrayList(LIST_HISTORIC_KEY, listaOperacoes)
         }
         super.onSaveInstanceState(outState)
