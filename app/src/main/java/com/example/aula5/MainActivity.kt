@@ -9,8 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.text.SimpleDateFormat
+import kotlin.collections.ArrayList
 
-const val EXTRA_NAME = "com.example.aula5.listaOperacoes"
+const val EXTRA_OPERATIONS = "com.example.aula5.listaOperacoes"
 
 class MainActivity : AppCompatActivity() {
     private val TAG = MainActivity::class.java.simpleName
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private val HISTORIC_KEY = "historic"
     private val LIST_HISTORIC_KEY = "list_historic"
 
-    private var listaOperacoes = arrayListOf("1+1=2")
+    private var listaOperacoes = mutableListOf<Operation>(Operation("1+1","2"))
     private lateinit var historyAdapter: HistoryAdapter
 
     /* Funcoes onClick */
@@ -65,10 +66,10 @@ class MainActivity : AppCompatActivity() {
         val operacao = text_visor.text
         text_visor.text = expression.evaluate().toString()
 
-        listaOperacoes.add("$operacao = ${text_visor.text}")
-        historyAdapter = HistoryAdapter(this, R.layout.item_expression, listaOperacoes)
+        listaOperacoes.add(Operation(operacao.toString(), text_visor.text.toString()))
+        historyAdapter = HistoryAdapter(this, R.layout.item_expression, ArrayList(listaOperacoes))
         list_historic?.adapter = historyAdapter
-        historic?.text = listaOperacoes.get(listaOperacoes.size - 1)
+        historic?.text = listaOperacoes.get(listaOperacoes.size - 1).toString()
 
         Log.i(TAG, "O resultado da expressão é ${text_visor.text}")
     }
@@ -77,9 +78,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "o método onCreate foi invocado")
         setContentView(R.layout.activity_main)
-        historyAdapter = HistoryAdapter(this, R.layout.item_expression, listaOperacoes)
+        historyAdapter = HistoryAdapter(this, R.layout.item_expression, ArrayList(listaOperacoes))
         list_historic?.adapter = historyAdapter
-        historic?.text = listaOperacoes.get(listaOperacoes.size - 1)
+        historic?.text = listaOperacoes.get(listaOperacoes.size - 1).toString()
 
         /* Funcionalidade Botões Operações */
         button_equals.setOnClickListener {
@@ -88,8 +89,8 @@ class MainActivity : AppCompatActivity() {
 
         /* Funcionalidade Botão de listar historico */
         button_list_historic?.setOnClickListener {
-            val intent = Intent(this, ListHistoricActivity::class.java)
-            intent.apply { putStringArrayListExtra(EXTRA_NAME, listaOperacoes) }
+            val intent = Intent(this, HistoryActivity::class.java)
+            intent.apply { putParcelableArrayListExtra(EXTRA_OPERATIONS, ArrayList(listaOperacoes)) }
             startActivity(intent)
             finish()
         }

@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.item_expression.view.*
 
-class HistoryAdapter(context: Context, private val layout: Int, items: ArrayList<String>) : ArrayAdapter<String> (context, layout, items) {
+class HistoryAdapter(context: Context,
+                     private val layout: Int,
+                     items: ArrayList<Operation>) : ArrayAdapter<Operation> (context, layout, items) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = convertView ?: LayoutInflater.from(context).inflate(layout, parent, false)
-        val expressionParts = getItem(position)?.split("=") // ex: 1+1=2
-        view.text_expression.text = expressionParts!![0] // 1+1
-        view.text_result.text = expressionParts[1] // 2
+        view.text_expression.text = getItem(position)?.expression
+        view.text_result.text = getItem(position)?.result.toString()
         return view
     }
 
