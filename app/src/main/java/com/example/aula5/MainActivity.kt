@@ -1,25 +1,30 @@
 package com.example.aula5
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.text.SimpleDateFormat
+import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity(){
+const val EXTRA_OPERATIONS = "com.example.aula5.listaOperacoes"
 
+class MainActivity : AppCompatActivity() {
     private val TAG = MainActivity::class.java.simpleName
     private val VISOR_KEY = "visor"
-    private val HISTORIC_KEqY = "historic"
+    private val HISTORIC_KEY = "historic"
     private val LIST_HISTORIC_KEY = "list_historic"
 
-    private var listaOperacoes = arrayListOf("1+1=2")
+    private var listaOperacoes = mutableListOf<Operation>(Operation("1+1","2"))
     private lateinit var historyAdapter: HistoryAdapter
 
     /* Funcoes onClick */
-    private fun onClickSymbol(symbol: String) {
+     fun onClickSymbol(view: View) {
 
+        val symbol = view.tag.toString()
         //val padrao = "hh:mm:ss"
         //val simpleDateFormat = SimpleDateFormat(padrao)
 
@@ -30,10 +35,11 @@ class MainActivity : AppCompatActivity(){
             text_visor.append(symbol)
         }
     }
-    private fun onClickOperation(operation: String) {
+     fun onClickOperation(view: View) {
 
-        // val padrao = "hh:mm:ss"
-        // val simpleDateFormat = SimpleDateFormat(padrao)
+        val operation = view.tag.toString()
+        val padrao = "hh:mm:ss"
+        val simpleDateFormat = SimpleDateFormat(padrao)
 
         if (operation == "del") {
             Log.i(TAG, "Click no botão DEL")
@@ -49,18 +55,24 @@ class MainActivity : AppCompatActivity(){
             Log.i(TAG, "Click no botão $operation")
             text_visor.append(operation)
         }
+<<<<<<< HEAD
         // Toast.makeText(this, "Metodo: button_$operation\nHora: ${simpleDateFormat.format(Date())}", Toast.LENGTH_SHORT).show()
+=======
+
+        //Toast.makeText(this, "Metodo: button_$operation\nHora: ${simpleDateFormat.format(Date())}", Toast.LENGTH_SHORT).show()
+>>>>>>> ResolucaoFicha
     }
-    private fun onClickEquals() {
+     private fun onClickEquals() {
+
         Log.i(TAG, "Click no botão =")
         val expression = ExpressionBuilder(text_visor.text.toString()).build()
         val operacao = text_visor.text
         text_visor.text = expression.evaluate().toString()
 
-        listaOperacoes.add("$operacao = ${text_visor.text}")
-        historyAdapter = HistoryAdapter(this, R.layout.item_expression, listaOperacoes)
+        listaOperacoes.add(Operation(operacao.toString(), text_visor.text.toString()))
+        historyAdapter = HistoryAdapter(this, R.layout.item_expression, ArrayList(listaOperacoes))
         list_historic?.adapter = historyAdapter
-        historic?.text = listaOperacoes[listaOperacoes.size -1]
+        historic?.text = listaOperacoes.get(listaOperacoes.size - 1).toString()
 
         Log.i(TAG, "O resultado da expressão é ${text_visor.text}")
     }
@@ -69,64 +81,21 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         Log.i(TAG, "o método onCreate foi invocado")
         setContentView(R.layout.activity_main)
+        historyAdapter = HistoryAdapter(this, R.layout.item_expression, ArrayList(listaOperacoes))
         list_historic?.adapter = historyAdapter
-
-        /* Funcionalidade Botões Numericos */
-        button_00?.setOnClickListener {
-            onClickSymbol("00")
-        }
-        button_0.setOnClickListener {
-            onClickSymbol("0")
-        }
-        button_1.setOnClickListener {
-            onClickSymbol("1")
-        }
-        button_2.setOnClickListener {
-            onClickSymbol("2")
-        }
-        button_3.setOnClickListener {
-            onClickSymbol("3")
-        }
-        button_4.setOnClickListener {
-            onClickSymbol("4")
-        }
-        button_5.setOnClickListener {
-            onClickSymbol("5")
-        }
-        button_6.setOnClickListener {
-            onClickSymbol("6")
-        }
-        button_7.setOnClickListener {
-            onClickSymbol("7")
-        }
-        button_8.setOnClickListener {
-            onClickSymbol("8")
-        }
-        button_9.setOnClickListener {
-            onClickSymbol("9")
-        }
-        button_period.setOnClickListener {
-            onClickSymbol(".")
-        }
+        historic?.text = listaOperacoes.get(listaOperacoes.size - 1).toString()
 
         /* Funcionalidade Botões Operações */
-        button_adition.setOnClickListener {
-            onClickOperation("+")
-        }
-        button_sub.setOnClickListener {
-            onClickOperation("-")
-        }
-        button_del.setOnClickListener {
-            onClickOperation("del")
-        }
-        button_C.setOnClickListener {
-            onClickOperation("C")
-        }
-        button_divide.setOnClickListener {
-            onClickOperation("/")
-        }
         button_equals.setOnClickListener {
             onClickEquals()
+        }
+
+        /* Funcionalidade Botão de listar historico */
+        button_list_historic?.setOnClickListener {
+            val intent = Intent(this, HistoryActivity::class.java)
+            intent.apply { putParcelableArrayListExtra(EXTRA_OPERATIONS, ArrayList(listaOperacoes)) }
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -137,15 +106,11 @@ class MainActivity : AppCompatActivity(){
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         text_visor.text = savedInstanceState.getString(VISOR_KEY)
-        //historic?.text = savedInstanceState.getString(HISTORIC_KEY)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.run {
-            putString(VISOR_KEY, text_visor.text.toString())
-            //putString(HISTORIC_KEY, historic?.text.toString())
-            // putStringArrayList(LIST_HISTORIC_KEY, listaOperacoes)
-        }
+        outState.run { putString(VISOR_KEY, text_visor.text.toString())}
         super.onSaveInstanceState(outState)
     }
+
 }
