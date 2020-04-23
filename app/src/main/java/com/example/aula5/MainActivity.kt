@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity(){
             Log.i(TAG, "Click no botão $operation")
             text_visor.append(operation)
         }
-
         // Toast.makeText(this, "Metodo: button_$operation\nHora: ${simpleDateFormat.format(Date())}", Toast.LENGTH_SHORT).show()
     }
     private fun onClickEquals() {
