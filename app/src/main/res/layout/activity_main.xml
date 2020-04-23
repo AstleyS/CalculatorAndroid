@@ -34,16 +34,21 @@
         <Button
             android:backgroundTint="@color/greyish"
             android:id="@+id/button_C"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="C" />
+            android:onClick="onClickOperation"
+            android:tag="C"
+            android:text="C"
+            />
 
         <Button
             android:backgroundTint="@color/greyish"
             android:id="@+id/button_del"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickOperation"
+            android:tag="del"
             android:text="del" />
 
         <Button
@@ -51,6 +56,8 @@
             android:id="@+id/button_divide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickOperation"
+            android:tag="/"
             android:text="/" />
     </LinearLayout>
     <!-- Primeira Row -->
@@ -61,28 +68,38 @@
 
         <Button
             android:id="@+id/button_7"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClickSymbol"
+            android:tag="7"
             android:text="7" />
 
         <Button
             android:id="@+id/button_8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickSymbol"
+            android:tag="8"
             android:text="8" />
 
         <Button
             android:id="@+id/button_9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickSymbol"
+            android:tag="9"
             android:text="9" />
+
         <Button
             android:backgroundTint="@color/yellowish"
             android:id="@+id/button_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickOperation"
+            android:tag="*"
             android:text="*" />
+
     </LinearLayout>
     <!-- Segunda Row -->
     <LinearLayout
@@ -95,18 +112,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClickSymbol"
+            android:tag="4"
             android:text="4" />
 
         <Button
             android:id="@+id/button_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickSymbol"
+            android:tag="5"
             android:text="5" />
 
         <Button
             android:id="@+id/button_6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickSymbol"
+            android:tag="6"
             android:text="6" />
 
         <Button
@@ -114,6 +137,8 @@
             android:id="@+id/button_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickOperation"
+            android:tag="-"
             android:text="-" />
     </LinearLayout>
     <!-- Terceira Row -->
@@ -127,18 +152,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClickSymbol"
+            android:tag="1"
             android:text="1" />
 
         <Button
             android:id="@+id/button_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickSymbol"
+            android:tag="2"
             android:text="2" />
 
         <Button
             android:id="@+id/button_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickSymbol"
+            android:tag="3"
             android:text="3" />
 
         <Button
@@ -146,7 +177,10 @@
             android:id="@+id/button_adition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickOperation"
+            android:tag="+"
             android:text="+" />
+
     </LinearLayout>
     <!-- Quarta Row -->
     <LinearLayout
@@ -156,9 +190,11 @@
 
         <Button
             android:id="@+id/button_0"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClickSymbol"
+            android:tag="0"
             android:text="0" />
 
         <Button
@@ -166,6 +202,8 @@
             android:id="@+id/button_period"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickSymbol"
+            android:tag="."
             android:text="." />
 
         <Button
@@ -174,6 +212,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="=" />
+
     </LinearLayout>
     <!-- See historic -->
     <LinearLayout
@@ -183,9 +222,8 @@
 
         <Button
             android:id="@+id/button_list_historic"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="Historico" />
 
     </LinearLayout>

@@ -4,6 +4,7 @@ package com.example.aula5
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.ExpressionBuilder
@@ -21,8 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var historyAdapter: HistoryAdapter
 
     /* Funcoes onClick */
-    private fun onClickSymbol(symbol: String) {
+     fun onClickSymbol(view: View) {
 
+        val symbol = view.tag.toString()
         //val padrao = "hh:mm:ss"
         //val simpleDateFormat = SimpleDateFormat(padrao)
 
@@ -33,8 +35,9 @@ class MainActivity : AppCompatActivity() {
             text_visor.append(symbol)
         }
     }
-    private fun onClickOperation(operation: String) {
+     fun onClickOperation(view: View) {
 
+        val operation = view.tag.toString()
         val padrao = "hh:mm:ss"
         val simpleDateFormat = SimpleDateFormat(padrao)
 
@@ -55,7 +58,8 @@ class MainActivity : AppCompatActivity() {
 
         //Toast.makeText(this, "Metodo: button_$operation\nHora: ${simpleDateFormat.format(Date())}", Toast.LENGTH_SHORT).show()
     }
-    private fun onClickEquals() {
+     private fun onClickEquals() {
+
         Log.i(TAG, "Click no botão =")
         val expression = ExpressionBuilder(text_visor.text.toString()).build()
         val operacao = text_visor.text
@@ -77,60 +81,7 @@ class MainActivity : AppCompatActivity() {
         list_historic?.adapter = historyAdapter
         historic?.text = listaOperacoes.get(listaOperacoes.size - 1)
 
-        /* Funcionalidade Botões Numericos */
-        button_00?.setOnClickListener {
-            onClickSymbol("00")
-        }
-        button_0.setOnClickListener {
-            onClickSymbol("0")
-        }
-        button_1.setOnClickListener {
-            onClickSymbol("1")
-        }
-        button_2.setOnClickListener {
-            onClickSymbol("2")
-        }
-        button_3.setOnClickListener {
-            onClickSymbol("3")
-        }
-        button_4.setOnClickListener {
-            onClickSymbol("4")
-        }
-        button_5.setOnClickListener {
-            onClickSymbol("5")
-        }
-        button_6.setOnClickListener {
-            onClickSymbol("6")
-        }
-        button_7.setOnClickListener {
-            onClickSymbol("7")
-        }
-        button_8.setOnClickListener {
-            onClickSymbol("8")
-        }
-        button_9.setOnClickListener {
-            onClickSymbol("9")
-        }
-        button_period.setOnClickListener {
-            onClickSymbol(".")
-        }
-
         /* Funcionalidade Botões Operações */
-        button_adition.setOnClickListener {
-            onClickOperation("+")
-        }
-        button_sub.setOnClickListener {
-            onClickOperation("-")
-        }
-        button_del.setOnClickListener {
-            onClickOperation("del")
-        }
-        button_C.setOnClickListener {
-            onClickOperation("C")
-        }
-        button_divide.setOnClickListener {
-            onClickOperation("/")
-        }
         button_equals.setOnClickListener {
             onClickEquals()
         }
@@ -157,4 +108,5 @@ class MainActivity : AppCompatActivity() {
         outState.run { putString(VISOR_KEY, text_visor.text.toString())}
         super.onSaveInstanceState(outState)
     }
+
 }
