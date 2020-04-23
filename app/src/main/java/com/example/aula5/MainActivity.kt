@@ -135,6 +135,7 @@ class MainActivity : AppCompatActivity() {
             onClickEquals()
         }
 
+        /* Funcionalidade Botão de listar historico */
         button_list_historic?.setOnClickListener {
             val intent = Intent(this, ListHistoricActivity::class.java)
             intent.apply { putStringArrayListExtra(EXTRA_NAME, listaOperacoes) }
