@@ -11,9 +11,9 @@ class HistoryAdapter(context: Context, private val layout: Int, items: ArrayList
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = convertView ?: LayoutInflater.from(context).inflate(layout, parent, false)
-        val expressionParts = getItem(position)?.split("=")
-        view.text_expression.text = expressionParts!![0]
-        view.text_result.text = expressionParts[1]
+        val expressionParts = getItem(position)?.split("=") // ex: 1+1=2
+        view.text_expression.text = expressionParts!![0] // 1+1
+        view.text_result.text = expressionParts[1] // 2
         return view
     }
 

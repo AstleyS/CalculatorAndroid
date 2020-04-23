@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
     private val VISOR_KEY = "visor"
-    private var listaOperacoes = arrayListOf<String>("1+1=2")
+    private var listaOperacoes = arrayListOf("1+1=2")
 
     /* Funcoes onClick */
     private fun onClickSymbol(symbol: String) {
