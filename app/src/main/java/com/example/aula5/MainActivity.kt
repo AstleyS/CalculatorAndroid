@@ -1,17 +1,22 @@
 package com.example.aula5
 
+
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_expression.view.*
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.text.SimpleDateFormat
 
-class MainActivity : AppCompatActivity() {
+const val EXTRA_NAME = "com.example.aula5.listaOperacoes"
 
+class MainActivity : AppCompatActivity() {
     private val TAG = MainActivity::class.java.simpleName
     private val VISOR_KEY = "visor"
+    private val HISTORIC_KEY = "historic"
+    private val LIST_HISTORIC_KEY = "list_historic"
+
     private var listaOperacoes = arrayListOf("1+1=2")
     private lateinit var historyAdapter: HistoryAdapter
 
@@ -129,6 +134,13 @@ class MainActivity : AppCompatActivity() {
         button_equals.setOnClickListener {
             onClickEquals()
         }
+
+        button_list_historic?.setOnClickListener {
+            val intent = Intent(this, ListHistoricActivity::class.java)
+            intent.apply { putStringArrayListExtra(EXTRA_NAME, listaOperacoes) }
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onDestroy() {
@@ -141,7 +153,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.run { putString(VISOR_KEY, text_visor.text.toString()) }
+        outState.run { putString(VISOR_KEY, text_visor.text.toString())}
         super.onSaveInstanceState(outState)
     }
 }
