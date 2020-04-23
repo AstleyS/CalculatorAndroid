@@ -1,6 +1,5 @@
 package com.example.aula5
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log

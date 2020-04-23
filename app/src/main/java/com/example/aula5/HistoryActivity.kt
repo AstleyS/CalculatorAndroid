@@ -3,6 +3,8 @@ package com.example.aula5
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.android.synthetic.main.activity_main.list_historic
 
@@ -13,6 +15,7 @@ class HistoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_history)
 
         val listaOperacoes = intent.getParcelableArrayListExtra<Operation>(EXTRA_OPERATIONS)
+        list_historic?.layoutManager = LinearLayoutManager(this)
         list_historic?.adapter = HistoryAdapter(this, R.layout.item_expression, listaOperacoes)
 
         button_back.setOnClickListener {
