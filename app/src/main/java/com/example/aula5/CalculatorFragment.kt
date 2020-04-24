@@ -24,7 +24,11 @@ class CalculatorFragment : Fragment() {
     private lateinit var historyAdapter: HistoryAdapter
 
     /* Funcoes onClick */
-    @OnClick
+    @Optional
+    @OnClick (R.id.button_00, R.id.button_0, R.id.button_1,
+        R.id.button_2, R.id.button_3, R.id.button_4, R.id.button_5, R.id.button_6,
+        R.id.button_7, R.id.button_8, R.id.button_9, R.id.button_period
+    )
     fun onClickSymbol(view: View) {
 
         val symbol = view.tag.toString()
@@ -39,7 +43,8 @@ class CalculatorFragment : Fragment() {
         }
     }
 
-    @OnClick
+    @OnClick (R.id.button_adition, R.id.button_divide, R.id.button_sub,
+        R.id.button_del, R.id.button_C, R.id.button_product)
     fun onClickOperation(view: View) {
 
         val operation = view.tag.toString()
@@ -64,7 +69,8 @@ class CalculatorFragment : Fragment() {
         //Toast.makeText(this, "Metodo: button_$operation\nHora: ${simpleDateFormat.format(Date())}", Toast.LENGTH_SHORT).show()
     }
 
-    private fun onClickEquals() {
+    @OnClick (R.id.button_equals)
+    fun onClickEquals(view: View) {
 
         Log.i(TAG, "Click no botão =")
         val expression = ExpressionBuilder(text_visor.text.toString()).build()
