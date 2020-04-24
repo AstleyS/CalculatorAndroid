@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_history.*
-import kotlinx.android.synthetic.main.activity_main.list_historic
+import kotlinx.android.synthetic.main.fragment_calculator.list_historic
 
 class HistoryActivity : AppCompatActivity() {
 
