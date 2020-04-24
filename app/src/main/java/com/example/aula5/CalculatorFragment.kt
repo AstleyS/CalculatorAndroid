@@ -1,7 +1,6 @@
 package com.example.aula5
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -86,26 +85,22 @@ class CalculatorFragment : Fragment() {
     }
 
     /* Funcionalidade Botão de listar historico */
+    @Optional
+    @OnClick (R.id.button_list_historic)
     fun onClickHistory(view: View) {
-        /*
-        val intent = Intent(this, HistoryActivity::class.java)
-        intent.apply { putParcelableArrayListExtra(EXTRA_OPERATIONS, ArrayList(listaOperacoes)) }
-        startActivity(intent)
-        finish()
-        */
-
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        /* Atualizar
+        /* Atualizar */
         historyAdapter = HistoryAdapter(activity as Context, R.layout.item_expression, ArrayList(listaOperacoes))
         list_historic?.adapter = historyAdapter
         historic?.text = listaOperacoes.get(listaOperacoes.size - 1).toString()
-        */
+
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)

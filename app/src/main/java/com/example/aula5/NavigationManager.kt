@@ -18,6 +18,11 @@ abstract class NavigationManager {
             placeFragment(fm, CalculatorFragment())
         }
 
+        fun gotToHistoryFragment(fm: FragmentManager) {
+            placeFragment(fm, HistoryFragment())
+        }
+
+
     }
 
 }
