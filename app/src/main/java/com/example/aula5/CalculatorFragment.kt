@@ -24,9 +24,9 @@ class CalculatorFragment : Fragment() {
 
     /* Funcoes onClick */
     @Optional
-    @OnClick (R.id.button_00, R.id.button_0, R.id.button_1,
-        R.id.button_2, R.id.button_3, R.id.button_4, R.id.button_5, R.id.button_6,
-        R.id.button_7, R.id.button_8, R.id.button_9, R.id.button_period
+    @OnClick (R.id.button_00, R.id.button_0, R.id.button_1, R.id.button_2,
+              R.id.button_3, R.id.button_4, R.id.button_5, R.id.button_6,
+              R.id.button_7, R.id.button_8, R.id.button_9, R.id.button_period
     )
     fun onClickSymbol(view: View) {
 
@@ -43,7 +43,7 @@ class CalculatorFragment : Fragment() {
     }
 
     @OnClick (R.id.button_adition, R.id.button_divide, R.id.button_sub,
-        R.id.button_del, R.id.button_C, R.id.button_product)
+              R.id.button_del, R.id.button_C, R.id.button_product)
     fun onClickOperation(view: View) {
 
         val operation = view.tag.toString()
@@ -89,7 +89,6 @@ class CalculatorFragment : Fragment() {
     @OnClick (R.id.button_list_historic)
     fun onClickHistory(view: View) {
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
