@@ -5,4 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="yellowish">#FFC107</color>
     <color name="greyish">#CFCCCC</color>
+    <color name="white">#FFFFFF</color>
 </resources>
