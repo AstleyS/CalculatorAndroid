@@ -47,8 +47,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
         when(item.itemId) {
             R.id.nav_calulator -> NavigationManager.gotToCalculatorFragment(supportFragmentManager)
+            R.id.nav_history, R.id.button_list_historic -> NavigationManager.gotToHistoryFragment(supportFragmentManager)
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
