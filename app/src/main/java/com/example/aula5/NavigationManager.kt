@@ -3,6 +3,7 @@ package com.example.aula5
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.aula5.view.CalculatorFragment
+import com.example.aula5.view.HistoryFragment
 
 abstract class NavigationManager {
 

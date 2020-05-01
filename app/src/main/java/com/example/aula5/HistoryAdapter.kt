@@ -26,7 +26,7 @@ class HistoryAdapter(private val context: Context,
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         holder.expression.text = items[position].expression
-        holder.result.text = items[position].result
+        holder.result.text = items[position].result.toString()
     }
 
     override fun getItemCount() = items.size

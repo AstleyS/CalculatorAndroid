@@ -10,20 +10,17 @@ import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
-import com.example.aula5.HistoryAdapter
-import com.example.aula5.MainActivity
-import com.example.aula5.Operation
-import com.example.aula5.R
+import com.example.aula5.*
 import com.example.aula5.viewModel.CalculatorViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
 
 const val EXTRA_OPERATIONS = "com.example.aula5.listaOperacoes"
 
-class CalculatorFragment : Fragment() {
+class CalculatorFragment : Fragment(), OnDisplayChanged {
 
     private var listaOperacoes = mutableListOf(
-        Operation("1+1", "2")
+        Operation("1+1", 2.0)
     )
     private lateinit var viewModel: CalculatorViewModel
     private lateinit var historyAdapter: HistoryAdapter
@@ -39,14 +36,14 @@ class CalculatorFragment : Fragment() {
     )
     fun onClickSymbol(view: View) {
 
-        text_visor.text = viewModel.onClickSymbol(view.tag.toString())
+        text_visor.text = viewModel.onClickSymbol(view.tag.toString()).toString()
 
     }
 
     @OnClick (R.id.button_equals)
     fun onClickEquals(view: View) {
 
-        text_visor.text = viewModel.onClickEquals()
+        text_visor.text = viewModel.onClickEquals().toString()
 
         /*
         Log.i(TAG, "Click no botão =")
@@ -79,7 +76,6 @@ class CalculatorFragment : Fragment() {
         viewModel.onClickHistory(activity?.supportFragmentManager!!)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -97,9 +93,21 @@ class CalculatorFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
-        viewModel.display.let { view.text_visor.text = it }
         ButterKnife.bind(this, view)
         return view
     }
 
+    override fun onStart() {
+        viewModel.registerListener(this)
+        super.onStart()
+    }
+
+    override fun onDisplayChanged(value: String?) {
+        value.let { text_visor.text = it }
+    }
+
+    override fun onDestroy() {
+        viewModel.unregisterListener()
+        super.onDestroy()
+    }
 }

@@ -1,7 +1,5 @@
-package com.example.aula5
+package com.example.aula5.view
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,8 +8,8 @@ import android.view.ViewGroup
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
+import com.example.aula5.R
 import com.example.aula5.viewModel.CalculatorViewModel
-import kotlinx.android.synthetic.main.fragment_history.*
 
 class HistoryFragment : Fragment() {
 
