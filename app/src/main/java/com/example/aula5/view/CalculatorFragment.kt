@@ -78,12 +78,6 @@ class CalculatorFragment : Fragment() {
     fun onClickHistory(view: View) {
         viewModel.onClickHistory(activity?.supportFragmentManager!!)
     }
-    @Optional
-    @OnClick (R.id.button_back)
-    fun onClickBackHistory(view: View) {
-        viewModel.onClickBackHistory(activity?.supportFragmentManager!!)
-    }
-
 
 
     override fun onCreateView(

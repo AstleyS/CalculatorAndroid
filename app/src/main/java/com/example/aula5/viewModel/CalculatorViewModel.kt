@@ -26,6 +26,7 @@ class CalculatorViewModel: ViewModel() {
     fun onClickHistory(supportManager: FragmentManager) {
         NavigationManager.gotToHistoryFragment(supportManager)
     }
+
     fun onClickBackHistory(supportManager: FragmentManager) {
         NavigationManager.gotToCalculatorFragment(supportManager)
     }
