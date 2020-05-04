@@ -1,14 +1,14 @@
 package com.example.aula5.data.local.list
 
 import com.example.aula5.Operation
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ListStorage {
 
-    private val storage = mutableListOf<Operation>(
-        Operation("1+1", 2.0)
-    )
+    private val storage = mutableListOf<Operation>()
 
     companion object {
 
@@ -25,16 +25,13 @@ class ListStorage {
         }
     }
 
-    suspend fun insert(operation: Operation) {
+    fun insert(operation: Operation) {
 
-        withContext(Dispatchers.IO) {
-            Thread.sleep(3000)
+        CoroutineScope(Dispatchers.IO).launch {
             storage.add(operation)
 
         }
     }
 
-
     fun getAll(): MutableList<Operation> = storage
-
 }

@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
@@ -67,7 +66,6 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         savedInstanceState: Bundle?
     ): View? {
 
-
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
@@ -92,6 +90,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     }
 
     fun updateList() {
+
         // Atualizar
         historyAdapter = HistoryAdapter(
             activity as Context,
@@ -101,7 +100,5 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
 
         list_historic?.layoutManager = LinearLayoutManager(activity as Context)
         list_historic?.adapter = historyAdapter
-        historic?.text = listaOperacoes.get(listaOperacoes.size - 1).toString()
-
     }
 }

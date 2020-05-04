@@ -15,7 +15,7 @@ import com.example.aula5.Operation
 import com.example.aula5.R
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.viewmodels.CalculatorViewModel
-import kotlinx.android.synthetic.main.fragment_calculator.*
+import kotlinx.android.synthetic.main.fragment_history.*
 
 class HistoryFragment : Fragment() {
 
@@ -52,8 +52,6 @@ class HistoryFragment : Fragment() {
 
         list_historic?.layoutManager = LinearLayoutManager(activity as Context)
         list_historic?.adapter = historyAdapter
-        historic?.text = listaOperacoes.get(listaOperacoes.size - 1).toString()
-
     }
 
 }

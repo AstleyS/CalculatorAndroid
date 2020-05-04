@@ -34,12 +34,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         text_visor.text = savedInstanceState.getString(VISOR_KEY)
+        //historic?.text = savedInstanceState.getString(HISTORIC_KEY)
 
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.run {
             putString(VISOR_KEY, text_visor.text.toString())
+            //putString(HISTORIC_KEY, historic?.text.toString())
         }
         super.onSaveInstanceState(outState)
     }
