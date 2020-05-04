@@ -1,13 +1,14 @@
-package com.example.aula5
+package com.example.aula5.data.local.list
 
-import kotlinx.coroutines.CoroutineScope
+import com.example.aula5.Operation
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ListStorage {
 
-    private val storage = mutableListOf<Operation>()
+    private val storage = mutableListOf<Operation>(
+        Operation("1+1", 2.0)
+    )
 
     companion object {
 
@@ -16,7 +17,8 @@ class ListStorage {
         fun getInstance(): ListStorage {
             synchronized(this) {
                 if (instance == null) {
-                    instance = ListStorage()
+                    instance =
+                        ListStorage()
                 }
                 return instance as ListStorage
             }
@@ -33,7 +35,6 @@ class ListStorage {
     }
 
 
-
-    fun getAll(): List<Operation> = storage.toList()
+    fun getAll(): MutableList<Operation> = storage
 
 }

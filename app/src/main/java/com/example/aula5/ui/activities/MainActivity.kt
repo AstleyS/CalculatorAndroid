@@ -1,18 +1,16 @@
-package com.example.aula5
+package com.example.aula5.ui.activities
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import com.example.aula5.R
+import com.example.aula5.ui.utils.NavigationManager
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_calculator.*
-import net.objecthunter.exp4j.ExpressionBuilder
-import java.text.SimpleDateFormat
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -61,7 +59,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 //on long click, interface com ... ao metodo
     private fun setupDrawerMenu() {
-        val toogle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close)
+        val toogle = ActionBarDrawerToggle(this, drawer, toolbar,
+            R.string.drawer_open,
+            R.string.drawer_close
+        )
         nav_drawer.setNavigationItemSelectedListener(this)
         drawer.addDrawerListener(toogle)
         toogle.syncState()

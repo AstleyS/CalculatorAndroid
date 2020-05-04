@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.CalculatorFragment">
+    tools:context=".ui.fragments.CalculatorFragment">
 
     <!-- Visor -->
     <TextView
@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onClickOperation"
+            android:onClick="onClickSymbol"
             android:tag="C"
             android:text="C"
             />
@@ -47,7 +47,7 @@
             android:id="@+id/button_del"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onClickOperation"
+            android:onClick="onClickSymbol"
             android:tag="del"
             android:text="del" />
 
@@ -56,7 +56,7 @@
             android:id="@+id/button_divide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onClickOperation"
+            android:onClick="onClickSymbol"
             android:tag="/"
             android:text="/" />
     </LinearLayout>
@@ -96,7 +96,7 @@
             android:id="@+id/button_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onClickOperation"
+            android:onClick="onClickSymbol"
             android:tag="*"
             android:text="*" />
 
@@ -137,7 +137,7 @@
             android:id="@+id/button_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onClickOperation"
+            android:onClick="onClickSymbol"
             android:tag="-"
             android:text="-" />
     </LinearLayout>
@@ -177,7 +177,7 @@
             android:id="@+id/button_adition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onClickOperation"
+            android:onClick="onClickSymbol"
             android:tag="+"
             android:text="+" />
 

@@ -1,4 +1,4 @@
-package com.example.aula5.view
+package com.example.aula5.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -6,24 +6,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import com.example.aula5.*
-import com.example.aula5.viewModel.CalculatorViewModel
+import com.example.aula5.ui.adapters.HistoryAdapter
+import com.example.aula5.ui.listeners.OnDisplayChanged
+import com.example.aula5.ui.viewmodels.CalculatorViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
-import kotlinx.android.synthetic.main.fragment_calculator.view.*
 
 const val EXTRA_OPERATIONS = "com.example.aula5.listaOperacoes"
 
 class CalculatorFragment : Fragment(), OnDisplayChanged {
 
-    private var listaOperacoes = mutableListOf(
-        Operation("1+1", 2.0)
-    )
     private lateinit var viewModel: CalculatorViewModel
     private lateinit var historyAdapter: HistoryAdapter
+    private lateinit var listaOperacoes: MutableList<Operation>
 
     /* Funcoes onClick */
     @Optional
@@ -36,34 +37,19 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     )
     fun onClickSymbol(view: View) {
 
-        text_visor.text = viewModel.onClickSymbol(view.tag.toString()).toString()
+        text_visor.text = viewModel.onClickSymbol(view.tag.toString())
 
     }
 
     @OnClick (R.id.button_equals)
     fun onClickEquals(view: View) {
 
-        text_visor.text = viewModel.onClickEquals().toString()
+        text_visor.text = viewModel.onClickEquals()
+        updateList()
 
         /*
         Log.i(TAG, "Click no botão =")
-        val expression = ExpressionBuilder(text_visor.text.toString()).build()
-        val operacao = text_visor.text
-        text_visor.text = expression.evaluate().toString()
 
-        listaOperacoes.add(
-            Operation(
-                operacao.toString(),
-                text_visor.text.toString()
-            )
-        )
-        historyAdapter = HistoryAdapter(
-            activity as Context,
-            R.layout.item_expression,
-            ArrayList(listaOperacoes)
-        )
-        list_historic?.adapter = historyAdapter
-        historic?.text = listaOperacoes.get(listaOperacoes.size - 1).toString()
 
         Log.i(TAG, "O resultado da expressão é ${text_visor.text}")
          */
@@ -81,18 +67,12 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         savedInstanceState: Bundle?
     ): View? {
 
-        /* Atualizar */
-        historyAdapter = HistoryAdapter(
-            activity as Context,
-            R.layout.item_expression,
-            ArrayList(listaOperacoes)
-        )
-        list_historic?.adapter = historyAdapter
-        historic?.text = listaOperacoes.get(listaOperacoes.size - 1).toString()
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
+        listaOperacoes = viewModel.getOperations()
+        updateList()
         ButterKnife.bind(this, view)
         return view
     }
@@ -109,5 +89,19 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     override fun onDestroy() {
         viewModel.unregisterListener()
         super.onDestroy()
+    }
+
+    fun updateList() {
+        // Atualizar
+        historyAdapter = HistoryAdapter(
+            activity as Context,
+            R.layout.item_expression,
+            ArrayList(listaOperacoes)
+        )
+
+        list_historic?.layoutManager = LinearLayoutManager(activity as Context)
+        list_historic?.adapter = historyAdapter
+        historic?.text = listaOperacoes.get(listaOperacoes.size - 1).toString()
+
     }
 }

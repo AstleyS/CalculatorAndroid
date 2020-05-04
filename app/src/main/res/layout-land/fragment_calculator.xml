@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.activities.MainActivity">
 
     <!-- Resultado -->
     <TextView
@@ -67,7 +67,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="@color/greyish"
-                    android:onClick="onClickOperation"
+                    android:onClick="onClickSymbol"
                     android:tag="C"
                     android:text="C" />
 
@@ -77,7 +77,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="@color/greyish"
-                    android:onClick="onClickOperation"
+                    android:onClick="onClickSymbol"
                     android:tag="del"
                     android:text="del" />
 
@@ -87,7 +87,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="@color/yellowish"
-                    android:onClick="onClickOperation"
+                    android:onClick="onClickSymbol"
                     android:tag="/"
                     android:text="/" />
 
@@ -142,7 +142,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="@color/yellowish"
-                    android:onClick="onClickOperation"
+                    android:onClick="onClickSymbol"
                     android:tag="*"
                     android:text="*" />
 
@@ -188,7 +188,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="onClickOperation"
+                    android:onClick="onClickSymbol"
                     android:tag="-"
                     android:text="-" />
 
@@ -198,7 +198,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="@color/yellowish"
-                    android:onClick="onClickOperation"
+                    android:onClick="onClickSymbol"
                     android:tag="+"
                     android:text="+" />
 
@@ -245,6 +245,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
+                    android:onClick="onClickEquals"
                     android:text="=" />
             </LinearLayout>
         </LinearLayout>

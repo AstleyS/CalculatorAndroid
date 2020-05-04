@@ -1,6 +1,6 @@
-package com.example.aula5.domain
+package com.example.aula5.domain.calculator
 
-import com.example.aula5.ListStorage
+import com.example.aula5.data.local.list.ListStorage
 import com.example.aula5.Operation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,18 +12,18 @@ class CalculatorLogic {
     private val storage = ListStorage.getInstance()
 
     fun insertSymbol(display: String, symbol: String): String {
+
         when (symbol) {
-            "0" -> return symbol
+            "0" -> {
+                if (display == "0") return symbol
+                return "$display$symbol"
+            }
             "del" -> {
                 if (display.length == 1) return "0"
                 return display.substring(0, display.length - 1)
             }
             "C" -> return "0"
-            else -> {
-                if (symbol.equals("0")) return symbol
-                return "$display$symbol"
-            }
-
+            else -> return "$display$symbol"
         }
     }
 
@@ -36,5 +36,7 @@ class CalculatorLogic {
 
         return expressionBuilder.evaluate()
     }
+
+    fun getAll() : MutableList<Operation> = storage.getAll()
 
 }
