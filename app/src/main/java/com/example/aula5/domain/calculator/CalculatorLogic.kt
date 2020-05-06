@@ -30,9 +30,8 @@ class CalculatorLogic {
     fun performeOperation(expression: String): Double {
         val expressionBuilder = ExpressionBuilder(expression).build()
         val result = expressionBuilder.evaluate()
-        CoroutineScope(Dispatchers.IO).launch {
-            storage.insert(Operation(expression, result))
-        }
+
+        storage.insert(Operation(expression, result))
 
         return expressionBuilder.evaluate()
     }

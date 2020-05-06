@@ -27,10 +27,8 @@ class ListStorage {
 
     fun insert(operation: Operation) {
 
-        CoroutineScope(Dispatchers.IO).launch {
-            storage.add(operation)
+        storage.add(operation)
 
-        }
     }
 
     fun getAll(): MutableList<Operation> = storage

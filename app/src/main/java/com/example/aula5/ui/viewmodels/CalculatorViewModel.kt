@@ -14,16 +14,14 @@ class CalculatorViewModel: ViewModel() {
     private val calculatorLogic = CalculatorLogic()
     var display: String = "0"
 
-    fun onClickSymbol(symbol: String): String {
+    fun onClickSymbol(symbol: String) {
         display = calculatorLogic.insertSymbol(display, symbol)
         notifyOnDisplayChanged()
-        return display
     }
 
-    fun onClickEquals(): String {
+    fun onClickEquals() {
         display = calculatorLogic.performeOperation(display).toString()
         notifyOnDisplayChanged()
-        return display
     }
 
     fun getOperations() : MutableList<Operation> {

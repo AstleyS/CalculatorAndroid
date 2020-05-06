@@ -36,14 +36,14 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     )
     fun onClickSymbol(view: View) {
 
-        text_visor.text = viewModel.onClickSymbol(view.tag.toString())
+        viewModel.onClickSymbol(view.tag.toString())
 
     }
 
     @OnClick (R.id.button_equals)
     fun onClickEquals(view: View) {
 
-        text_visor.text = viewModel.onClickEquals()
+        viewModel.onClickEquals()
         updateList()
 
         /*
