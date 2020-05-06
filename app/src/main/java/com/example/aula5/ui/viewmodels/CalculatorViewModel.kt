@@ -19,9 +19,17 @@ class CalculatorViewModel: ViewModel() {
         notifyOnDisplayChanged()
     }
 
-    fun onClickEquals() {
-        display = calculatorLogic.performeOperation(display).toString()
+    fun onClickOperation(symbol: String) {
+        display = calculatorLogic.insertOperation(display, symbol)
         notifyOnDisplayChanged()
+    }
+
+    fun onClickEquals() {
+
+        if (display[display.length -1] !in "/*-+") {
+            display = calculatorLogic.performeOperation(display).toString()
+            notifyOnDisplayChanged()
+        }
     }
 
     fun getOperations() : MutableList<Operation> {

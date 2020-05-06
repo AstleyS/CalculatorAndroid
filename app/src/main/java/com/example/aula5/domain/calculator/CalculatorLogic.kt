@@ -13,29 +13,38 @@ class CalculatorLogic {
 
     fun insertSymbol(display: String, symbol: String): String {
 
+        if (display == "0") return symbol
+        return "$display$symbol"
+
+    }
+
+    fun insertOperation(display: String, symbol: String): String {
+
         when (symbol) {
-            "0" -> {
-                if (display == "0") return symbol
-                return "$display$symbol"
-            }
+
             "del" -> {
                 if (display.length == 1) return "0"
                 return display.substring(0, display.length - 1)
             }
             "C" -> return "0"
-            else -> return "$display$symbol"
+            else -> {
+                if (display[display.length -1] in "/*-+") return "${display.substring(0, display.length - 1)}$symbol"
+                return "$display$symbol"
+            }
+
         }
     }
 
     fun performeOperation(expression: String): Double {
         val expressionBuilder = ExpressionBuilder(expression).build()
         val result = expressionBuilder.evaluate()
-
         storage.insert(Operation(expression, result))
 
         return expressionBuilder.evaluate()
     }
 
-    fun getAll() : MutableList<Operation> = storage.getAll()
+    fun getAll(): MutableList<Operation> = storage.getAll()
+
+    fun removeOperation(operation: Operation) = storage.removeOperation(operation)
 
 }

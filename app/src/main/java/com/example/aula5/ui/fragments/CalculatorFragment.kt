@@ -30,14 +30,20 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     @OnClick (
         R.id.button_00, R.id.button_0, R.id.button_1, R.id.button_2,
         R.id.button_3, R.id.button_4, R.id.button_5, R.id.button_6,
-        R.id.button_7, R.id.button_8, R.id.button_9, R.id.button_period,
-        R.id.button_adition, R.id.button_divide, R.id.button_sub,
-        R.id.button_del, R.id.button_C, R.id.button_product
+        R.id.button_7, R.id.button_8, R.id.button_9, R.id.button_period
     )
     fun onClickSymbol(view: View) {
 
         viewModel.onClickSymbol(view.tag.toString())
 
+    }
+
+    @OnClick (
+        R.id.button_adition, R.id.button_divide, R.id.button_sub,
+        R.id.button_del, R.id.button_C, R.id.button_product
+    )
+    fun onClickOperation(view: View) {
+        viewModel.onClickOperation(view.tag.toString())
     }
 
     @OnClick (R.id.button_equals)
@@ -90,6 +96,8 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     }
 
     fun updateList() {
+
+        if (!listaOperacoes.isEmpty()) historic?.text = listaOperacoes.get(listaOperacoes.size -1).toString()
 
         // Atualizar
         historyAdapter = HistoryAdapter(

@@ -26,10 +26,10 @@ class ListStorage {
     }
 
     fun insert(operation: Operation) {
-
         storage.add(operation)
-
     }
 
     fun getAll(): MutableList<Operation> = storage
+
+    fun removeOperation(operation: Operation) = storage.remove(operation)
 }
