@@ -1,5 +1,6 @@
-package com.example.aula5
+package com.example.aula5.data.local.list
 
+import com.example.aula5.Operation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,24 +17,19 @@ class ListStorage {
         fun getInstance(): ListStorage {
             synchronized(this) {
                 if (instance == null) {
-                    instance = ListStorage()
+                    instance =
+                        ListStorage()
                 }
                 return instance as ListStorage
             }
         }
     }
 
-    suspend fun insert(operation: Operation) {
-
-        withContext(Dispatchers.IO) {
-            Thread.sleep(3000)
-            storage.add(operation)
-
-        }
+    fun insert(operation: Operation) {
+        storage.add(operation)
     }
 
+    fun getAll(): MutableList<Operation> = storage
 
-
-    fun getAll(): List<Operation> = storage.toList()
-
+    fun removeOperation(operation: Operation) = storage.remove(operation)
 }

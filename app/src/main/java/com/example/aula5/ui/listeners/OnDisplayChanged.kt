@@ -1,4 +1,4 @@
-package com.example.aula5
+package com.example.aula5.ui.listeners
 
 interface OnDisplayChanged {
 

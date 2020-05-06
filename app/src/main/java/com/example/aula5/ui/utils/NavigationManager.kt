@@ -1,9 +1,10 @@
-package com.example.aula5
+package com.example.aula5.ui.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.aula5.view.CalculatorFragment
-import com.example.aula5.view.HistoryFragment
+import com.example.aula5.R
+import com.example.aula5.ui.fragments.CalculatorFragment
+import com.example.aula5.ui.fragments.HistoryFragment
 
 abstract class NavigationManager {
 
@@ -17,11 +18,17 @@ abstract class NavigationManager {
         }
 
         fun gotToCalculatorFragment(fm: FragmentManager) {
-            placeFragment(fm, CalculatorFragment())
+            placeFragment(
+                fm,
+                CalculatorFragment()
+            )
         }
 
         fun gotToHistoryFragment(fm: FragmentManager) {
-            placeFragment(fm, HistoryFragment())
+            placeFragment(
+                fm,
+                HistoryFragment()
+            )
         }
 
 
