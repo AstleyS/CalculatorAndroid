@@ -1,8 +1,10 @@
-package com.example.aula5
+package com.example.aula5.data.local.entities
 
+import androidx.room.Entity
 import java.util.*
 
-class Operation(val expression: String, val result: Double) {
+@Entity
+data class Operation(val expression: String, val result: Double) {
 
     var uuid: String = UUID.randomUUID().toString()
 

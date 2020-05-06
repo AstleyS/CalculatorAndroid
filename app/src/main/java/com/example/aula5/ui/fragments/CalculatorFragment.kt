@@ -12,6 +12,7 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import com.example.aula5.*
+import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.ui.viewmodels.CalculatorViewModel

@@ -2,7 +2,7 @@ package com.example.aula5.ui.viewmodels
 
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
-import com.example.aula5.Operation
+import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.ui.utils.NavigationManager
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.domain.calculator.CalculatorLogic

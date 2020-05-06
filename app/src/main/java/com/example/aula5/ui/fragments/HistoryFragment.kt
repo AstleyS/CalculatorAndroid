@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
-import com.example.aula5.Operation
+import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.R
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.viewmodels.CalculatorViewModel

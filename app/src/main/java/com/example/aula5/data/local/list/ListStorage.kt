@@ -1,10 +1,6 @@
 package com.example.aula5.data.local.list
 
-import com.example.aula5.Operation
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.aula5.data.local.entities.Operation
 
 class ListStorage {
 

@@ -1,10 +1,7 @@
 package com.example.aula5.domain.calculator
 
 import com.example.aula5.data.local.list.ListStorage
-import com.example.aula5.Operation
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.aula5.data.local.entities.Operation
 import net.objecthunter.exp4j.ExpressionBuilder
 
 class CalculatorLogic {
@@ -38,7 +35,12 @@ class CalculatorLogic {
     fun performeOperation(expression: String): Double {
         val expressionBuilder = ExpressionBuilder(expression).build()
         val result = expressionBuilder.evaluate()
-        storage.insert(Operation(expression, result))
+        storage.insert(
+            Operation(
+                expression,
+                result
+            )
+        )
 
         return expressionBuilder.evaluate()
     }
