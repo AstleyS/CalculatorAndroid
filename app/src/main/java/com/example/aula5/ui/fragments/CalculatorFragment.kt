@@ -33,40 +33,26 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         R.id.button_3, R.id.button_4, R.id.button_5, R.id.button_6,
         R.id.button_7, R.id.button_8, R.id.button_9, R.id.button_period
     )
-    fun onClickSymbol(view: View) {
+    fun onClickSymbol(view: View) = viewModel.onClickSymbol(view.tag.toString())
 
-        viewModel.onClickSymbol(view.tag.toString())
-
-    }
 
     @OnClick (
         R.id.button_adition, R.id.button_divide, R.id.button_sub,
         R.id.button_del, R.id.button_C, R.id.button_product
     )
-    fun onClickOperation(view: View) {
-        viewModel.onClickOperation(view.tag.toString())
-    }
+    fun onClickOperation(view: View) = viewModel.onClickOperation(view.tag.toString())
+
 
     @OnClick (R.id.button_equals)
     fun onClickEquals(view: View) {
-
         viewModel.onClickEquals()
         updateList()
-
-        /*
-        Log.i(TAG, "Click no botão =")
-
-
-        Log.i(TAG, "O resultado da expressão é ${text_visor.text}")
-         */
     }
 
     /* Funcionalidade Botão de listar historico */
     @Optional
     @OnClick (R.id.button_list_historic)
-    fun onClickHistory(view: View) {
-        viewModel.onClickHistory(activity?.supportFragmentManager!!)
-    }
+    fun onClickHistory(view: View) = viewModel.onClickHistory(activity?.supportFragmentManager!!)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,10 +72,10 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         viewModel.registerListener(this)
         super.onStart()
     }
+    /*************************/
+    override fun onDisplayChanged(value: String?) = value.let { text_visor.text = it }
 
-    override fun onDisplayChanged(value: String?) {
-        value.let { text_visor.text = it }
-    }
+    override fun onReceiveOperation(listaOperacoes: MutableList<Operation>) = listaOperacoes.let { this.listaOperacoes = it }
 
     override fun onDestroy() {
         viewModel.unregisterListener()

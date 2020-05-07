@@ -13,6 +13,7 @@ class CalculatorViewModel: ViewModel() {
     private var listener: OnDisplayChanged? = null
     private val calculatorLogic = CalculatorLogic()
     var display: String = "0"
+    var listaOperacoes = mutableListOf<Operation>()
 
     fun onClickSymbol(symbol: String) {
         display = calculatorLogic.insertSymbol(display, symbol)
@@ -48,9 +49,14 @@ class CalculatorViewModel: ViewModel() {
         listener?.onDisplayChanged(display)
     }
 
+    private fun notifyOnReceiveOperationChanged() {
+        listener?.onReceiveOperation(listaOperacoes)
+    }
+
     fun registerListener(listener: OnDisplayChanged) {
         this.listener = listener
         listener.onDisplayChanged(display)
+        listener.onReceiveOperation(listaOperacoes)
     }
 
     fun unregisterListener() {
