@@ -72,6 +72,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         viewModel.registerListener(this)
         super.onStart()
     }
+
     /*************************/
     override fun onDisplayChanged(value: String?) = value.let { text_visor.text = it }
 

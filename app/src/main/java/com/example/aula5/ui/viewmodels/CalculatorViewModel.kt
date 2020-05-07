@@ -1,17 +1,22 @@
 package com.example.aula5.ui.viewmodels
 
+import android.app.Application
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import com.example.aula5.data.local.entities.Operation
+import com.example.aula5.data.local.room.CalculatorDatabase
 import com.example.aula5.ui.utils.NavigationManager
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.domain.calculator.CalculatorLogic
 
 
-class CalculatorViewModel: ViewModel() {
+class CalculatorViewModel(application: Application): AndroidViewModel(application) {
+
+    private val storage = CalculatorDatabase.getInstance(application).operationDao()
+    private val calculatorLogic = CalculatorLogic(storage)
 
     private var listener: OnDisplayChanged? = null
-    private val calculatorLogic = CalculatorLogic()
     var display: String = "0"
     var listaOperacoes = mutableListOf<Operation>()
 
@@ -56,7 +61,6 @@ class CalculatorViewModel: ViewModel() {
     fun registerListener(listener: OnDisplayChanged) {
         this.listener = listener
         listener.onDisplayChanged(display)
-        listener.onReceiveOperation(listaOperacoes)
     }
 
     fun unregisterListener() {

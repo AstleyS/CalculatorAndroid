@@ -2,11 +2,14 @@ package com.example.aula5.domain.calculator
 
 import com.example.aula5.data.local.list.ListStorage
 import com.example.aula5.data.local.entities.Operation
+import com.example.aula5.data.local.room.dao.OperationDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
+class CalculatorLogic(private val storage: OperationDao) {
 
-class CalculatorLogic {
-
-    private val storage = ListStorage.getInstance()
+    // private val storage = ListStorage.getInstance()
 
     fun insertSymbol(display: String, symbol: String): String {
 
@@ -35,18 +38,33 @@ class CalculatorLogic {
     fun performeOperation(expression: String): Double {
         val expressionBuilder = ExpressionBuilder(expression).build()
         val result = expressionBuilder.evaluate()
-        storage.insert(
-            Operation(
-                expression,
-                result
+        CoroutineScope(Dispatchers.IO).launch {
+            storage.insert(
+                Operation(
+                    expression,
+                    result
+                )
             )
-        )
+
+        }
 
         return expressionBuilder.evaluate()
     }
 
-    fun getAll(): MutableList<Operation> = storage.getAll()
+    fun getAll(): MutableList<Operation> {
+        var operations = mutableListOf<Operation>()
+        CoroutineScope(Dispatchers.IO).launch {
+            operations = storage.getAll()
+        }
+        // Tem que ser com listener
+        return operations
+    }
 
-    fun removeOperation(operation: Operation) = storage.removeOperation(operation)
+    fun removeOperation(operation: Operation) {
+        CoroutineScope(Dispatchers.IO).launch {
+            storage.removeOperation(operation)
+        }
+    }
 
 }
+
