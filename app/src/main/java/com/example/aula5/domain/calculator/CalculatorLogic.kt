@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
 class CalculatorLogic(private val storage: OperationDao) {
 
-    // private val storage = ListStorage.getInstance()
 
     fun insertSymbol(display: String, symbol: String): String {
 
@@ -47,7 +46,6 @@ class CalculatorLogic(private val storage: OperationDao) {
             )
 
         }
-
         return expressionBuilder.evaluate()
     }
 
@@ -56,7 +54,6 @@ class CalculatorLogic(private val storage: OperationDao) {
         CoroutineScope(Dispatchers.IO).launch {
             operations = storage.getAll()
         }
-        // Tem que ser com listener
         return operations
     }
 

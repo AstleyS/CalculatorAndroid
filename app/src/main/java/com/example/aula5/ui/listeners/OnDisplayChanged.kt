@@ -6,6 +6,5 @@ interface OnDisplayChanged {
 
     fun onDisplayChanged(value: String?)
 
-    fun onReceiveOperation(listaOperacoes: MutableList<Operation>)
     
 }

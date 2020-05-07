@@ -15,16 +15,15 @@ import com.example.aula5.*
 import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.listeners.OnDisplayChanged
+import com.example.aula5.ui.listeners.OnReceiveOperationsChanged
 import com.example.aula5.ui.viewmodels.CalculatorViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
-const val EXTRA_OPERATIONS = "com.example.aula5.listaOperacoes"
-
-class CalculatorFragment : Fragment(), OnDisplayChanged {
+class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperationsChanged {
 
     private lateinit var viewModel: CalculatorViewModel
     private lateinit var historyAdapter: HistoryAdapter
-    private lateinit var listaOperacoes: MutableList<Operation>
+    var listaOperacoes = mutableListOf<Operation>()
 
     /* Funcoes onClick */
     @Optional
@@ -35,13 +34,11 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     )
     fun onClickSymbol(view: View) = viewModel.onClickSymbol(view.tag.toString())
 
-
     @OnClick (
         R.id.button_adition, R.id.button_divide, R.id.button_sub,
         R.id.button_del, R.id.button_C, R.id.button_product
     )
     fun onClickOperation(view: View) = viewModel.onClickOperation(view.tag.toString())
-
 
     @OnClick (R.id.button_equals)
     fun onClickEquals(view: View) {
@@ -62,7 +59,6 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
-        listaOperacoes = viewModel.getOperations()
         updateList()
         ButterKnife.bind(this, view)
         return view
@@ -70,20 +66,24 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
 
     override fun onStart() {
         viewModel.registerListener(this)
+        viewModel.registerListenerOperation(this)
         super.onStart()
     }
 
     /*************************/
     override fun onDisplayChanged(value: String?) = value.let { text_visor.text = it }
 
-    override fun onReceiveOperation(listaOperacoes: MutableList<Operation>) = listaOperacoes.let { this.listaOperacoes = it }
+    override fun onReceiveOperations(listaOperacoes: MutableList<Operation>) = listaOperacoes.let { this.listaOperacoes = it }
 
     override fun onDestroy() {
         viewModel.unregisterListener()
+        viewModel.unregisterListenerOperation()
         super.onDestroy()
     }
 
     fun updateList() {
+
+        viewModel.getOperations()
 
         if (!listaOperacoes.isEmpty()) historic?.text = listaOperacoes.get(listaOperacoes.size -1).toString()
 

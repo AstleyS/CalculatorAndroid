@@ -3,12 +3,12 @@ package com.example.aula5.ui.viewmodels
 import android.app.Application
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.data.local.room.CalculatorDatabase
 import com.example.aula5.ui.utils.NavigationManager
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.domain.calculator.CalculatorLogic
+import com.example.aula5.ui.listeners.OnReceiveOperationsChanged
 
 
 class CalculatorViewModel(application: Application): AndroidViewModel(application) {
@@ -17,6 +17,7 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
     private val calculatorLogic = CalculatorLogic(storage)
 
     private var listener: OnDisplayChanged? = null
+    private var listenerOperation: OnReceiveOperationsChanged? = null
     var display: String = "0"
     var listaOperacoes = mutableListOf<Operation>()
 
@@ -38,8 +39,9 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
-    fun getOperations() : MutableList<Operation> {
-        return calculatorLogic.getAll()
+    fun getOperations()  {
+        listaOperacoes = calculatorLogic.getAll()
+        notifyOnReceiveOperationChanged()
     }
 
     fun onClickHistory(supportManager: FragmentManager) {
@@ -55,7 +57,7 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
     }
 
     private fun notifyOnReceiveOperationChanged() {
-        listener?.onReceiveOperation(listaOperacoes)
+        listenerOperation?.onReceiveOperations(listaOperacoes)
     }
 
     fun registerListener(listener: OnDisplayChanged) {
@@ -63,8 +65,17 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
         listener.onDisplayChanged(display)
     }
 
+    fun registerListenerOperation(listener: OnReceiveOperationsChanged) {
+        this.listenerOperation = listener
+        listener.onReceiveOperations(listaOperacoes)
+    }
+
     fun unregisterListener() {
         listener = null
+    }
+
+    fun unregisterListenerOperation() {
+        listenerOperation = null
     }
 
 }

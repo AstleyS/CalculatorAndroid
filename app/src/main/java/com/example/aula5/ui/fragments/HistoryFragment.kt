@@ -21,7 +21,7 @@ class HistoryFragment : Fragment() {
 
     private lateinit var viewModel: CalculatorViewModel
     private lateinit var historyAdapter: HistoryAdapter
-    private lateinit var listaOperacoes: MutableList<Operation>
+    var listaOperacoes = mutableListOf<Operation>()
 
     @Optional
     @OnClick (R.id.button_back)
@@ -36,7 +36,7 @@ class HistoryFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_history, container, false)
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
-        listaOperacoes = viewModel.getOperations()
+        viewModel.getOperations()
         updateList()
         ButterKnife.bind(this, view)
         return view
