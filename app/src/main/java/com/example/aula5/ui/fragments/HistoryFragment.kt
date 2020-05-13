@@ -36,13 +36,15 @@ class HistoryFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_history, container, false)
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
-        viewModel.getOperations()
         updateList()
         ButterKnife.bind(this, view)
         return view
     }
 
     fun updateList() {
+
+        viewModel.getOperations()
+
         // Atualizar
         historyAdapter = HistoryAdapter(
             activity as Context,

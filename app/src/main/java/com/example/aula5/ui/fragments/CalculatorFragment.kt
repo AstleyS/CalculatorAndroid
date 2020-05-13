@@ -23,7 +23,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperationsChan
 
     private lateinit var viewModel: CalculatorViewModel
     private lateinit var historyAdapter: HistoryAdapter
-    var listaOperacoes = mutableListOf<Operation>()
+    private var listaOperacoes = mutableListOf<Operation>()
 
     /* Funcoes onClick */
     @Optional

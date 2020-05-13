@@ -40,8 +40,7 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
     }
 
     fun getOperations()  {
-        listaOperacoes = calculatorLogic.getAll()
-        notifyOnReceiveOperationChanged()
+        calculatorLogic.getAll(listenerOperation)
     }
 
     fun onClickHistory(supportManager: FragmentManager) {
@@ -54,10 +53,6 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
 
     private fun notifyOnDisplayChanged() {
         listener?.onDisplayChanged(display)
-    }
-
-    private fun notifyOnReceiveOperationChanged() {
-        listenerOperation?.onReceiveOperations(listaOperacoes)
     }
 
     fun registerListener(listener: OnDisplayChanged) {
