@@ -8,7 +8,7 @@ import com.example.aula5.data.local.room.CalculatorDatabase
 import com.example.aula5.ui.utils.NavigationManager
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.domain.calculator.CalculatorLogic
-import com.example.aula5.ui.listeners.OnReceiveOperationsChanged
+import com.example.aula5.ui.listeners.OnReceiveOperations
 
 
 class CalculatorViewModel(application: Application): AndroidViewModel(application) {
@@ -17,7 +17,7 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
     private val calculatorLogic = CalculatorLogic(storage)
 
     private var listener: OnDisplayChanged? = null
-    private var listenerOperation: OnReceiveOperationsChanged? = null
+    private var listenerOperation: OnReceiveOperations? = null
     var display: String = "0"
     var listaOperacoes = mutableListOf<Operation>()
 
@@ -60,7 +60,7 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
         listener.onDisplayChanged(display)
     }
 
-    fun registerListenerOperation(listener: OnReceiveOperationsChanged) {
+    fun registerListenerOperation(listener: OnReceiveOperations) {
         this.listenerOperation = listener
         listener.onReceiveOperations(listaOperacoes)
     }

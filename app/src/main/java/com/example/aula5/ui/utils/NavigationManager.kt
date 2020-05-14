@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager
 import com.example.aula5.R
 import com.example.aula5.ui.fragments.CalculatorFragment
 import com.example.aula5.ui.fragments.HistoryFragment
+import com.example.aula5.ui.fragments.LoginFragment
+import com.example.aula5.ui.fragments.RegisterFragment
 
 abstract class NavigationManager {
 
@@ -28,6 +30,20 @@ abstract class NavigationManager {
             placeFragment(
                 fm,
                 HistoryFragment()
+            )
+        }
+
+        fun goToLoginFragment(fm: FragmentManager) {
+            placeFragment(
+                fm,
+                LoginFragment()
+            )
+        }
+
+        fun goToRegisterFragment(fm: FragmentManager) {
+            placeFragment(
+                fm,
+                RegisterFragment()
             )
         }
 

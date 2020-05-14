@@ -1,9 +1,8 @@
 package com.example.aula5.domain.calculator
 
-import com.example.aula5.data.local.list.ListStorage
 import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.data.local.room.dao.OperationDao
-import com.example.aula5.ui.listeners.OnReceiveOperationsChanged
+import com.example.aula5.ui.listeners.OnReceiveOperations
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,7 +49,7 @@ class CalculatorLogic(private val storage: OperationDao) {
         return expressionBuilder.evaluate()
     }
 
-    fun getAll(listener: OnReceiveOperationsChanged?) {
+    fun getAll(listener: OnReceiveOperations?) {
         CoroutineScope(Dispatchers.IO).launch {
             val operations = storage.getAll()
             listener?.onReceiveOperations(operations)

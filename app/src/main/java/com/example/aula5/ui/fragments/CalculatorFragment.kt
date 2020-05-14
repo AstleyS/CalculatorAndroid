@@ -15,11 +15,11 @@ import com.example.aula5.*
 import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.listeners.OnDisplayChanged
-import com.example.aula5.ui.listeners.OnReceiveOperationsChanged
+import com.example.aula5.ui.listeners.OnReceiveOperations
 import com.example.aula5.ui.viewmodels.CalculatorViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
-class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperationsChanged {
+class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
 
     private lateinit var viewModel: CalculatorViewModel
     private lateinit var historyAdapter: HistoryAdapter
