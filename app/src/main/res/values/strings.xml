@@ -15,9 +15,13 @@
     <!-- Auth -->
     <string name="Login">Login</string>
     <string name="Register">Register</string>
+    <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="insert_email">Insert Email</string>
     <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
     <string name="insert_password">Insert Password</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

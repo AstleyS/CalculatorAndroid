@@ -7,16 +7,17 @@ import com.example.aula5.R
 import com.example.aula5.ui.utils.NavigationManager
 import kotlinx.android.synthetic.main.activity_main.*
 
-class AuthActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
-    private val TAG = AuthActivity::class.java.simpleName
+    private val TAG = RegisterActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "o método onCreate foi invocado")
-        setContentView(R.layout.activity_auth)
+        setContentView(R.layout.activity_register)
+        toolbar.title = "Register"
         setSupportActionBar(toolbar)
-        NavigationManager.goToLoginFragment(supportFragmentManager)
+        NavigationManager.goToRegisterFragment(supportFragmentManager)
 
     }
 }

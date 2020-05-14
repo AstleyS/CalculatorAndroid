@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId) {
             R.id.nav_calulator -> NavigationManager.gotToCalculatorFragment(supportFragmentManager)
             R.id.nav_history, R.id.button_list_historic -> NavigationManager.gotToHistoryFragment(supportFragmentManager)
+            R.id.nav_logout -> finish()
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
@@ -58,7 +59,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun screenRotated(savedInstanceState: Bundle?): Boolean {
         return savedInstanceState != null
     }
+
 //on long click, interface com ... ao metodo
+
     private fun setupDrawerMenu() {
         val toogle = ActionBarDrawerToggle(this, drawer, toolbar,
             R.string.drawer_open,

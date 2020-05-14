@@ -13,8 +13,10 @@ import butterknife.OnClick
 import butterknife.Optional
 import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.R
+import com.example.aula5.ui.activities.MainActivity
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.viewmodels.CalculatorViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_history.*
 
 class HistoryFragment : Fragment() {
@@ -37,6 +39,7 @@ class HistoryFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_history, container, false)
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
         updateList()
+
         ButterKnife.bind(this, view)
         return view
     }

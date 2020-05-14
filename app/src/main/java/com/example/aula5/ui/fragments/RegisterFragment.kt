@@ -7,14 +7,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
+import butterknife.OnClick
+import butterknife.Optional
 
 import com.example.aula5.R
+import com.example.aula5.ui.activities.RegisterActivity
 import com.example.aula5.ui.viewmodels.AuthViewModel
+import kotlinx.android.synthetic.main.activity_login.*
 
 
 class RegisterFragment : Fragment() {
 
     private lateinit var viewModel: AuthViewModel
+
+    @Optional
+    @OnClick (R.id.button_login)
+    fun onClickSubmitRegister(view: View) {
+        viewModel.onClickSubmitRegister(activity)
+    }
+
+    @Optional
+    @OnClick (R.id.button_register)
+    fun onClickCancelRegister(view: View) {
+        viewModel.onClickCancelRegister(activity)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
