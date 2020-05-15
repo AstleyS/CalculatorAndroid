@@ -15,27 +15,38 @@ class AuthViewModel(application: Application): AndroidViewModel(application) {
     private val storage = UserDatabase.getInstance(application).userDao()
     private val authLogic = AuthLogic(storage)
 
-    fun onClickLogin(activity: FragmentActivity?) {
+    fun onClickLogin(activity: FragmentActivity?, email: String) {
         val intent = Intent(activity, MainActivity::class.java)
+        intent.apply { putExtra(EXTRA_EMAIL, email) }
         activity?.startActivity(intent)
+        activity?.finish()
     }
 
     fun onClickRegister(activity: FragmentActivity?) {
         val intent = Intent(activity, RegisterActivity::class.java)
         activity?.startActivity(intent)
+        activity?.finish()
     }
 
     fun onClickCancelRegister(activity: FragmentActivity?) {
         val intent = Intent(activity, LoginActivity::class.java)
         activity?.startActivity(intent)
+        activity?.finish()
     }
 
     fun onClickSubmitRegister(activity: FragmentActivity?, email: String, password: String) {
         // authLogic.saveUser(email, password)
         val intent = Intent(activity, LoginActivity::class.java)
         activity?.startActivity(intent)
+        activity?.finish()
     }
 
+
+
+
+    companion object {
+        const val EXTRA_EMAIL = "Email"
+    }
 
 
 }

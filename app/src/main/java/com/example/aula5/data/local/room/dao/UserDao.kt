@@ -15,4 +15,7 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE uuid = :uuid")
     suspend fun getById(uuid: String) : User
 
+    @Query("DELETE FROM user")
+    suspend fun nukeTable()
+
 }

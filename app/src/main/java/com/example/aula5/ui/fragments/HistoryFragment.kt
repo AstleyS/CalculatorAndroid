@@ -10,25 +10,27 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import butterknife.OnClick
-import butterknife.Optional
 import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.R
-import com.example.aula5.ui.activities.MainActivity
 import com.example.aula5.ui.adapters.HistoryAdapter
+import com.example.aula5.ui.listeners.OnReceiveOperations
 import com.example.aula5.ui.viewmodels.CalculatorViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_history.*
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(), OnReceiveOperations {
 
     private lateinit var viewModel: CalculatorViewModel
     private lateinit var historyAdapter: HistoryAdapter
     var listaOperacoes = mutableListOf<Operation>()
 
-    @Optional
     @OnClick (R.id.button_back)
     fun onClickBack(view: View) {
         viewModel.onClickBackHistory(activity?.supportFragmentManager!!)
+    }
+
+    @OnClick (R.id.button_test)
+    fun onClickTest(view: View) {
+        updateList()
     }
 
     override fun onCreateView(
@@ -44,6 +46,9 @@ class HistoryFragment : Fragment() {
         return view
     }
 
+    override fun onReceiveOperations(listaOperacoes: MutableList<Operation>) = listaOperacoes.let { this.listaOperacoes = it }
+
+
     fun updateList() {
 
         viewModel.getOperations()
@@ -57,6 +62,7 @@ class HistoryFragment : Fragment() {
 
         list_historic?.layoutManager = LinearLayoutManager(activity as Context)
         list_historic?.adapter = historyAdapter
+
     }
 
 }

@@ -16,7 +16,9 @@ import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.ui.listeners.OnReceiveOperations
+import com.example.aula5.ui.viewmodels.AuthViewModel
 import com.example.aula5.ui.viewmodels.CalculatorViewModel
+import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
 class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
@@ -32,7 +34,9 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
         R.id.button_3, R.id.button_4, R.id.button_5, R.id.button_6,
         R.id.button_7, R.id.button_8, R.id.button_9, R.id.button_period
     )
-    fun onClickSymbol(view: View) = viewModel.onClickSymbol(view.tag.toString())
+    fun onClickSymbol(view: View) {
+        viewModel.onClickSymbol(view.tag.toString())
+    }
 
     @OnClick (
         R.id.button_adition, R.id.button_divide, R.id.button_sub,
@@ -84,6 +88,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
     fun updateList() {
 
         viewModel.getOperations()
+        viewModel.getOperations()
 
         if (!listaOperacoes.isEmpty()) historic?.text = listaOperacoes.get(listaOperacoes.size -1).toString()
 
@@ -96,5 +101,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
 
         list_historic?.layoutManager = LinearLayoutManager(activity as Context)
         list_historic?.adapter = historyAdapter
+        viewModel.getOperations()
+
     }
 }

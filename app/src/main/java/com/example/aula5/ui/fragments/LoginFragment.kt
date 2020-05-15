@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -16,10 +17,17 @@ class LoginFragment : Fragment() {
 
     private lateinit var viewModel: AuthViewModel
 
+    private lateinit var email: EditText
+    private lateinit var password: EditText
+
     @Optional
     @OnClick (R.id.button_login)
     fun onClickLogin(view: View) {
-        viewModel.onClickLogin(activity)
+
+        if (!email.text.toString().isEmpty() && !password.text.toString().isEmpty()) {
+                viewModel.onClickLogin(activity, email.text.toString())
+        }
+
     }
 
     @Optional
@@ -28,7 +36,6 @@ class LoginFragment : Fragment() {
         viewModel.onClickRegister(activity)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +43,9 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
+
+        email = view.findViewById(R.id.login_email)
+        password = view.findViewById(R.id.login_password)
 
         ButterKnife.bind(this, view)
         return view

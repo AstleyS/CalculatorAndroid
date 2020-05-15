@@ -1,7 +1,6 @@
 package com.example.aula5.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
-
 import com.example.aula5.R
-import com.example.aula5.ui.activities.RegisterActivity
 import com.example.aula5.ui.viewmodels.AuthViewModel
-import kotlinx.android.synthetic.main.activity_login.*
-
 
 class RegisterFragment : Fragment() {
 
@@ -24,17 +19,17 @@ class RegisterFragment : Fragment() {
 
     lateinit var name: EditText
     lateinit var email: EditText
-    lateinit var pass: EditText
-    lateinit var repeat_pass: EditText
+    lateinit var password: EditText
+    lateinit var repeat_password: EditText
 
     @Optional
     @OnClick (R.id.button_submit_register)
     fun onClickSubmitRegister(view: View) {
 
-        if (!name.text.toString().isEmpty() && !email.text.toString().isEmpty() && !pass.text.toString().isEmpty()) {
+        if (!name.text.toString().isEmpty() && !email.text.toString().isEmpty() && !password.text.toString().isEmpty()) {
 
-            if (pass.text.toString() == repeat_pass.text.toString()) {
-                viewModel.onClickSubmitRegister(activity, email.text.toString(), pass.text.toString())
+            if (password.text.toString() == repeat_password.text.toString()) {
+                viewModel.onClickSubmitRegister(activity, email.text.toString(), password.text.toString())
             }
         }
     }
@@ -55,8 +50,8 @@ class RegisterFragment : Fragment() {
 
         name = view.findViewById(R.id.user_name)
         email = view.findViewById(R.id.user_email)
-        pass = view.findViewById(R.id.user_pass)
-        repeat_pass = view.findViewById(R.id.user_repeat_pass)
+        password = view.findViewById(R.id.user_pass)
+        repeat_password = view.findViewById(R.id.user_repeat_pass)
 
         ButterKnife.bind(this, view)
         return view

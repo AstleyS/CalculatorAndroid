@@ -62,5 +62,11 @@ class CalculatorLogic(private val storage: OperationDao) {
         }
     }
 
+    fun deleteOperations() {
+        CoroutineScope(Dispatchers.IO).launch {
+            storage.nukeTable()
+        }
+    }
+
 }
 
