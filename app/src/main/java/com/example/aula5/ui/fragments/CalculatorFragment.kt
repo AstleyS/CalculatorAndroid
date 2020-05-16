@@ -16,9 +16,7 @@ import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.ui.listeners.OnReceiveOperations
-import com.example.aula5.ui.viewmodels.AuthViewModel
 import com.example.aula5.ui.viewmodels.CalculatorViewModel
-import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
 class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
@@ -87,7 +85,6 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
 
     fun updateList() {
 
-        viewModel.getOperations()
         viewModel.getOperations()
 
         if (!listaOperacoes.isEmpty()) historic?.text = listaOperacoes.get(listaOperacoes.size -1).toString()

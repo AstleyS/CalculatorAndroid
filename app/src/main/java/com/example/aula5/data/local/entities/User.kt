@@ -5,10 +5,7 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity
-data class User(val login: String, val password: String) {
-
-    @PrimaryKey
-    var uuid: String = UUID.randomUUID().toString()
+data class User(@PrimaryKey val login: String, val password: String) {
 
     override fun toString(): String {
         return "Login $login; Password = $password"

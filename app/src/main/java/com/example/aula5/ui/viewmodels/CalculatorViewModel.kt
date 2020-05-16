@@ -19,7 +19,6 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
     private var listener: OnDisplayChanged? = null
     private var listenerOperation: OnReceiveOperations? = null
     var display: String = "0"
-    var listaOperacoes = mutableListOf<Operation>()
 
     fun onClickSymbol(symbol: String) {
         display = calculatorLogic.insertSymbol(display, symbol)
@@ -62,7 +61,6 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
 
     fun registerListenerOperation(listener: OnReceiveOperations) {
         this.listenerOperation = listener
-        listener.onReceiveOperations(listaOperacoes)
     }
 
     fun unregisterListener() {
