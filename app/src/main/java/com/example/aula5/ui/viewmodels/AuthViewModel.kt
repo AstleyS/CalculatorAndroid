@@ -5,21 +5,27 @@ import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.AndroidViewModel
 import com.example.aula5.data.local.room.UserDatabase
+import com.example.aula5.data.remote.RetrofitBuilder
 import com.example.aula5.domain.auth.AuthLogic
 import com.example.aula5.ui.activities.LoginActivity
 import com.example.aula5.ui.activities.MainActivity
 import com.example.aula5.ui.activities.RegisterActivity
 
+const val ENDPOINT = "https://cm-calculadora.herokuapp.com/api/"
+
 class AuthViewModel(application: Application): AndroidViewModel(application) {
 
     private val storage = UserDatabase.getInstance(application).userDao()
-    private val authLogic = AuthLogic(storage)
+    // private val authLogic = AuthLogic(storage)
+    private val authLogic = AuthLogic(RetrofitBuilder.getInstance(ENDPOINT))
 
-    fun onClickLogin(activity: FragmentActivity?, email: String) {
+    fun onClickLogin(activity: FragmentActivity?, email: String, password: String) {
+        authLogic.authenticateUser(email, password)
         val intent = Intent(activity, MainActivity::class.java)
         intent.apply { putExtra(EXTRA_EMAIL, email) }
         activity?.startActivity(intent)
         activity?.finish()
+
     }
 
     fun onClickRegister(activity: FragmentActivity?) {

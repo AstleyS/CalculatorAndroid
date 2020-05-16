@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
 class CalculatorLogic(private val storage: OperationDao) {
 
-
     fun insertSymbol(display: String, symbol: String): String {
 
         if (display == "0") return symbol

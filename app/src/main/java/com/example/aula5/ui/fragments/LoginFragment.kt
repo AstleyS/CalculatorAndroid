@@ -24,8 +24,14 @@ class LoginFragment : Fragment() {
     @OnClick (R.id.button_login)
     fun onClickLogin(view: View) {
 
+        /*
         if (!email.text.toString().isEmpty() && !password.text.toString().isEmpty()) {
                 viewModel.onClickLogin(activity, email.text.toString())
+        }
+         */
+
+        if (email.text.toString() == "cm@ulusofona.pt" && password.text.toString() == "cm") {
+            viewModel.onClickLogin(activity, email.text.toString(), password.text.toString())
         }
 
     }
