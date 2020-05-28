@@ -6,4 +6,5 @@
     <color name="yellowish">#FFC107</color>
     <color name="greyish">#CFCCCC</color>
     <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
 </resources>

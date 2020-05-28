@@ -53,6 +53,10 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
     @OnClick (R.id.button_list_historic)
     fun onClickHistory(view: View) = viewModel.onClickHistory(activity?.supportFragmentManager!!)
 
+ @Optional
+    @OnClick (R.id.button_clear_historic)
+    fun onClickClearHistory(view: View) = viewModel.onClickClearHistory()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -86,6 +90,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
     fun updateList() {
 
         viewModel.getOperations()
+        Thread.sleep(300)
 
         if (!listaOperacoes.isEmpty()) historic?.text = listaOperacoes.get(listaOperacoes.size -1).toString()
 
@@ -98,7 +103,6 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
 
         list_historic?.layoutManager = LinearLayoutManager(activity as Context)
         list_historic?.adapter = historyAdapter
-        viewModel.getOperations()
 
     }
 }

@@ -11,9 +11,10 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import com.example.aula5.R
+import com.example.aula5.ui.listeners.OnReceiveLoginAuth
 import com.example.aula5.ui.viewmodels.AuthViewModel
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), OnReceiveLoginAuth {
 
     private lateinit var viewModel: AuthViewModel
 
@@ -23,20 +24,16 @@ class LoginFragment : Fragment() {
     @Optional
     @OnClick (R.id.button_login)
     fun onClickLogin(view: View) {
-
-        /*
+/*
         if (!email.text.toString().isEmpty() && !password.text.toString().isEmpty()) {
-                viewModel.onClickLogin(activity, email.text.toString())
-        }
-         */
-
-        if (email.text.toString() == "cm@ulusofona.pt" && password.text.toString() == "cm") {
             viewModel.onClickLogin(activity, email.text.toString(), password.text.toString())
-        }
 
+        }
+ */
+        viewModel.onClickLogin(activity, email.text.toString(), password.text.toString())
     }
 
-    @Optional
+        @Optional
     @OnClick (R.id.button_register)
     fun onClickRegister(view: View) {
         viewModel.onClickRegister(activity)
@@ -56,5 +53,7 @@ class LoginFragment : Fragment() {
         ButterKnife.bind(this, view)
         return view
     }
+
+    override fun onReceiveLoginAuth(boolean: Boolean) = boolean.let { viewModel.auth = it }
 
 }

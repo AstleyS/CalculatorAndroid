@@ -215,18 +215,33 @@
             android:text="=" />
 
     </LinearLayout>
-    <!-- See historic -->
+    <!-- See historic & Delete -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="2"
+        >
+
+        <Button
+            android:id="@+id/button_clear_historic"
+            android:backgroundTint="@color/red"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClickClearHistory"
+            android:textColor="@color/white"
+            android:text="Limpar Historico"
+            />
 
         <Button
             android:id="@+id/button_list_historic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="onClickHistory"
             android:text="Historico" />
+
 
     </LinearLayout>
 

@@ -20,6 +20,11 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
     private var listenerOperation: OnReceiveOperations? = null
     var display: String = "0"
 
+    fun getOperations()  {
+        calculatorLogic.getAll(listenerOperation)
+    }
+
+
     fun onClickSymbol(symbol: String) {
         display = calculatorLogic.insertSymbol(display, symbol)
         notifyOnDisplayChanged()
@@ -38,9 +43,6 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
-    fun getOperations()  {
-        calculatorLogic.getAll(listenerOperation)
-    }
 
     fun onClickHistory(supportManager: FragmentManager) {
         NavigationManager.gotToHistoryFragment(supportManager)
@@ -48,6 +50,10 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
 
     fun onClickBackHistory(supportManager: FragmentManager) {
         NavigationManager.gotToCalculatorFragment(supportManager)
+    }
+
+    fun onClickClearHistory() {
+        calculatorLogic.deleteOperations()
     }
 
     private fun notifyOnDisplayChanged() {
