@@ -90,7 +90,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
     fun updateList() {
 
         viewModel.getOperations()
-        Thread.sleep(300)
+        Thread.sleep(500)
 
         if (!listaOperacoes.isEmpty()) historic?.text = listaOperacoes.get(listaOperacoes.size -1).toString()
 

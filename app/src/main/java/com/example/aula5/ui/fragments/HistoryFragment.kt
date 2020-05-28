@@ -48,10 +48,10 @@ class HistoryFragment : Fragment(), OnReceiveOperations {
 
     override fun onReceiveOperations(listaOperacoes: MutableList<Operation>) = listaOperacoes.let { this.listaOperacoes = it }
 
-
     fun updateList() {
 
         viewModel.getOperations()
+        Thread.sleep(500)
 
         // Atualizar
         historyAdapter = HistoryAdapter(

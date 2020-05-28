@@ -6,6 +6,7 @@ import com.example.aula5.data.remote.responses.PostOperationResponse
 import retrofit2.Response
 import retrofit2.http.*
 
+
 interface OperationService {
 
     @POST("/operations")
@@ -13,7 +14,5 @@ interface OperationService {
 
     @GET("/operations")
     suspend fun getOperation(): Response<GetOperationResponse>
-
-
 
 }

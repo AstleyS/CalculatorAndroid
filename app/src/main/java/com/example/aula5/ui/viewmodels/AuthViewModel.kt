@@ -20,11 +20,11 @@ class AuthViewModel(application: Application): AndroidViewModel(application) {
     // private val authLogic = AuthLogic(storage)
     private val authLogic = AuthLogic(RetrofitBuilder.getInstance(ENDPOINT))
     private var listenerAuth: OnReceiveLoginAuth? = null
-    var auth = true;
-
+    var auth = false;
 
     fun onClickLogin(activity: FragmentActivity?, email: String, password: String) {
         authLogic.authenticateUser(listenerAuth, email, password)
+        Thread.sleep(500)
 
         if (auth) {
             val intent = Intent(activity, MainActivity::class.java)
@@ -51,10 +51,6 @@ class AuthViewModel(application: Application): AndroidViewModel(application) {
         val intent = Intent(activity, LoginActivity::class.java)
         activity?.startActivity(intent)
         activity?.finish()
-    }
-
-    private fun notifyOnReceiveAuth() {
-        listenerAuth?.onReceiveLoginAuth(auth)
     }
 
     fun registerListener(listener: OnReceiveLoginAuth) {

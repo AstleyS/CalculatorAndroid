@@ -24,13 +24,10 @@ class LoginFragment : Fragment(), OnReceiveLoginAuth {
     @Optional
     @OnClick (R.id.button_login)
     fun onClickLogin(view: View) {
-/*
+
         if (!email.text.toString().isEmpty() && !password.text.toString().isEmpty()) {
             viewModel.onClickLogin(activity, email.text.toString(), password.text.toString())
-
         }
- */
-        viewModel.onClickLogin(activity, email.text.toString(), password.text.toString())
     }
 
         @Optional
@@ -52,6 +49,16 @@ class LoginFragment : Fragment(), OnReceiveLoginAuth {
 
         ButterKnife.bind(this, view)
         return view
+    }
+
+    override fun onStart() {
+        viewModel.registerListener(this)
+        super.onStart()
+    }
+
+    override fun onDestroy() {
+        viewModel.unregisterListener()
+        super.onDestroy()
     }
 
     override fun onReceiveLoginAuth(boolean: Boolean) = boolean.let { viewModel.auth = it }

@@ -52,7 +52,7 @@ class CalculatorLogic(private val storage: OperationDao) {
     fun getAll(listener: OnReceiveOperations?) {
         CoroutineScope(Dispatchers.IO).launch {
             val operations = storage.getAll()
-            listener?.onReceiveOperations(operations)
+            listener?.onReceiveOperations(operations) // notifies
         }
     }
 
