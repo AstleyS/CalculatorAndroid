@@ -17,6 +17,7 @@ import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.ui.listeners.OnReceiveOperations
 import com.example.aula5.ui.listeners.OnReceiveToken
+import com.example.aula5.ui.viewmodels.AuthViewModel.Companion.TOKEN
 import com.example.aula5.ui.viewmodels.CalculatorViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
@@ -66,6 +67,9 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations, On
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
+
+        val token = activity?.intent?.getStringExtra(TOKEN)
+        token.let { viewModel.token = token }
         updateList()
         ButterKnife.bind(this, view)
         return view

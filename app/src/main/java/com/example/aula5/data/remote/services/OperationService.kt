@@ -10,12 +10,12 @@ import retrofit2.http.*
 interface OperationService {
 
     @POST("/operations")
-    suspend fun postOperation(@Header ("Authorization") authorization : String, @Body body: Operation): Response<PostOperationResponse>
+    suspend fun postOperation(@Header ("Authorization") authorization : String?, @Body body: Operation): Response<PostOperationResponse>
 
     @GET("/operations")
-    suspend fun getOperation(@Header ("Authorization") authorization: String): Response<MutableList<Operation>>
+    suspend fun getOperation(@Header ("Authorization") authorization: String?): Response<MutableList<Operation>>
 
     @DELETE("/operations")
-    suspend fun deleteOperations(@Header ("Authorization") authorization: String): Response<MutableList<Operation>>
+    suspend fun deleteOperations(@Header ("Authorization") authorization: String?): Response<MutableList<Operation>>
 
 }

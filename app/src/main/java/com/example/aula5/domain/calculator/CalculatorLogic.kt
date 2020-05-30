@@ -41,7 +41,7 @@ class CalculatorLogic(private val retrofit: Retrofit /*private val storage: Oper
     fun performeOperation(expression: String): Double {
         val expressionBuilder = ExpressionBuilder(expression).build()
         val result = expressionBuilder.evaluate()
-
+/*
         val service = retrofit.create(OperationService::class.java)
         CoroutineScope(Dispatchers.IO).launch {
             val operacao = Operation(expression, result)
@@ -54,21 +54,23 @@ class CalculatorLogic(private val retrofit: Retrofit /*private val storage: Oper
                 Log.i(this::class.java.simpleName, response.errorBody().toString())
             }
         }
+
+ */
         return result
     }
 
-    fun getAll(listener: OnReceiveOperations?) {
+    fun getAll(listener: OnReceiveOperations?, token: String?) {
 
         val service = retrofit.create(OperationService::class.java)
         CoroutineScope(Dispatchers.IO).launch {
-            val response = service.getOperation("JWT")
+            val response = service.getOperation(token)
 
             if (response.isSuccessful) {
                 val operacoes = response.body()
                 listener?.onReceiveOperations(operacoes!!)
                 Log.i(this::class.java.simpleName, response.message())
             } else {
-                Log.i(this::class.java.simpleName, response.errorBody().toString())
+                Log.i(this::class.java.simpleName, response.message())
             }
         }
     }

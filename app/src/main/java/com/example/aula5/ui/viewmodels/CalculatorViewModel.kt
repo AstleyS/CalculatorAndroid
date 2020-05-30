@@ -23,7 +23,7 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
     var display: String = "0"
 
     fun getOperations()  {
-        calculatorLogic.getAll(listenerOperation)
+        calculatorLogic.getAll(listenerOperation, token)
     }
 
     fun onClickSymbol(symbol: String) {

@@ -69,5 +69,4 @@ class LoginFragment : Fragment(), OnReceiveLoginAuth, OnReceiveToken {
 
     override fun onReceiveToken(token: String?) = token.let { viewModel.token = it }
 
-
 }
