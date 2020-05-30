@@ -12,14 +12,15 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import com.example.aula5.*
-import com.example.aula5.data.local.entities.Operation
+import com.example.aula5.data.remote.requests.Operation
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.ui.listeners.OnReceiveOperations
+import com.example.aula5.ui.listeners.OnReceiveToken
 import com.example.aula5.ui.viewmodels.CalculatorViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
-class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
+class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations, OnReceiveToken {
 
     private lateinit var viewModel: CalculatorViewModel
     private lateinit var historyAdapter: HistoryAdapter
@@ -81,12 +82,13 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
 
     override fun onReceiveOperations(listaOperacoes: MutableList<Operation>) = listaOperacoes.let { this.listaOperacoes = it }
 
+    override fun onReceiveToken(token: String?) = token.let { viewModel.token = it }
+
     override fun onDestroy() {
         viewModel.unregisterListener()
         viewModel.unregisterListenerOperation()
         super.onDestroy()
     }
-
     fun updateList() {
 
         viewModel.getOperations()

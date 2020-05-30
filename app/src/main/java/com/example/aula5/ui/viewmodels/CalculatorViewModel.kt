@@ -5,19 +5,21 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.AndroidViewModel
 import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.data.local.room.CalculatorDatabase
+import com.example.aula5.data.remote.RetrofitBuilder
 import com.example.aula5.ui.utils.NavigationManager
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.domain.calculator.CalculatorLogic
 import com.example.aula5.ui.listeners.OnReceiveOperations
-
+import com.example.aula5.ui.viewmodels.AuthViewModel.Companion.TOKEN
 
 class CalculatorViewModel(application: Application): AndroidViewModel(application) {
 
     private val storage = CalculatorDatabase.getInstance(application).operationDao()
-    private val calculatorLogic = CalculatorLogic(storage)
+    private val calculatorLogic = CalculatorLogic(RetrofitBuilder.getInstance(ENDPOINT))
 
     private var listener: OnDisplayChanged? = null
     private var listenerOperation: OnReceiveOperations? = null
+    var token: String? = null
     var display: String = "0"
 
     fun getOperations()  {
@@ -75,5 +77,4 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
     fun unregisterListenerOperation() {
         listenerOperation = null
     }
-
 }

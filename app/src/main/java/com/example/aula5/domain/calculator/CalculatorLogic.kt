@@ -1,14 +1,18 @@
 package com.example.aula5.domain.calculator
 
-import com.example.aula5.data.local.entities.Operation
+
+import android.util.Log
+import com.example.aula5.data.remote.requests.Operation
 import com.example.aula5.data.local.room.dao.OperationDao
+import com.example.aula5.data.remote.services.OperationService
 import com.example.aula5.ui.listeners.OnReceiveOperations
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
+import retrofit2.Retrofit
 
-class CalculatorLogic(private val storage: OperationDao) {
+class CalculatorLogic(private val retrofit: Retrofit /*private val storage: OperationDao*/) {
 
     fun insertSymbol(display: String, symbol: String): String {
 
@@ -37,6 +41,42 @@ class CalculatorLogic(private val storage: OperationDao) {
     fun performeOperation(expression: String): Double {
         val expressionBuilder = ExpressionBuilder(expression).build()
         val result = expressionBuilder.evaluate()
+
+        val service = retrofit.create(OperationService::class.java)
+        CoroutineScope(Dispatchers.IO).launch {
+            val operacao = Operation(expression, result)
+            val response = service.postOperation("",operacao)
+
+            if (response.isSuccessful) {
+                response.body()
+                Log.i(this::class.java.simpleName, response.message())
+            } else {
+                Log.i(this::class.java.simpleName, response.errorBody().toString())
+            }
+        }
+        return result
+    }
+
+    fun getAll(listener: OnReceiveOperations?) {
+
+        val service = retrofit.create(OperationService::class.java)
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = service.getOperation("JWT")
+
+            if (response.isSuccessful) {
+                val operacoes = response.body()
+                listener?.onReceiveOperations(operacoes!!)
+                Log.i(this::class.java.simpleName, response.message())
+            } else {
+                Log.i(this::class.java.simpleName, response.errorBody().toString())
+            }
+        }
+    }
+
+    /*
+    fun performeOperation(expression: String): Double {
+        val expressionBuilder = ExpressionBuilder(expression).build()
+        val result = expressionBuilder.evaluate()
         CoroutineScope(Dispatchers.IO).launch {
             storage.insert(
                 Operation(
@@ -61,11 +101,21 @@ class CalculatorLogic(private val storage: OperationDao) {
             storage.removeOperation(operation)
         }
     }
-
+     */
     fun deleteOperations() {
+
+        val service = retrofit.create(OperationService::class.java)
         CoroutineScope(Dispatchers.IO).launch {
-            storage.nukeTable()
+            val response = service.deleteOperations("JWT")
+
+            if (response.isSuccessful) {
+                response.body()
+                Log.i(this::class.java.simpleName, response.message())
+            } else {
+                Log.i(this::class.java.simpleName, response.errorBody().toString())
+            }
         }
+
     }
 
 }

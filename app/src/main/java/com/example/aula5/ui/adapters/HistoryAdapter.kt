@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aula5.data.local.entities.Operation
+import com.example.aula5.data.remote.requests.Operation
 import kotlinx.android.synthetic.main.item_expression.view.*
 
 class HistoryAdapter(private val context: Context,
