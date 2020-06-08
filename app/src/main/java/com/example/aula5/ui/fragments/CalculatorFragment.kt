@@ -16,16 +16,14 @@ import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.ui.listeners.OnReceiveOperations
-import com.example.aula5.ui.listeners.OnReceiveToken
 import com.example.aula5.ui.viewmodels.AuthViewModel.Companion.TOKEN
 import com.example.aula5.ui.viewmodels.CalculatorViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
-class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations, OnReceiveToken {
+class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations {
 
     private lateinit var viewModel: CalculatorViewModel
     private lateinit var historyAdapter: HistoryAdapter
-    private var listaOperacoes = mutableListOf<Operation>()
 
     /* Funcoes onClick */
     @Optional
@@ -84,11 +82,8 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations, On
     /*************************/
     override fun onDisplayChanged(value: String?) = value.let { text_visor.text = it }
 
-    override fun onReceiveOperations(listaOperacoes: MutableList<Operation>) = listaOperacoes.let {
-        it.forEach {operation -> listaOperacoes.add(operation)}
-    }
+    override fun onReceiveOperations(listaOperacoes: MutableList<Operation>) = listaOperacoes.let { viewModel.listaOperacoes = it }
 
-    override fun onReceiveToken(token: String?) = token.let { viewModel.token = it }
 
     override fun onDestroy() {
         viewModel.unregisterListener()
@@ -100,6 +95,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations, On
         viewModel.getOperations()
         Thread.sleep(60)
 
+        val listaOperacoes = viewModel.listaOperacoes
         if (!listaOperacoes.isEmpty()) historic?.text = listaOperacoes.get(listaOperacoes.size -1).toString()
 
         // Atualizar

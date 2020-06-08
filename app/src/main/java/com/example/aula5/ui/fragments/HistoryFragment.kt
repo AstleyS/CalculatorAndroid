@@ -51,7 +51,7 @@ class HistoryFragment : Fragment(), OnReceiveOperations {
     fun updateList() {
 
         viewModel.getOperations()
-        Thread.sleep(500)
+        Thread.sleep(50)
 
         // Atualizar
         historyAdapter = HistoryAdapter(

@@ -11,7 +11,6 @@ import com.example.aula5.ui.activities.LoginActivity
 import com.example.aula5.ui.activities.MainActivity
 import com.example.aula5.ui.activities.RegisterActivity
 import com.example.aula5.ui.listeners.OnReceiveLoginAuth
-import com.example.aula5.ui.listeners.OnReceiveToken
 
 const val ENDPOINT = "https://cm-calculadora.herokuapp.com/api/"
 
@@ -21,12 +20,11 @@ class AuthViewModel(application: Application): AndroidViewModel(application) {
     // private val authLogic = AuthLogic(storage)
     private val authLogic = AuthLogic(RetrofitBuilder.getInstance(ENDPOINT))
     private var listenerAuth: OnReceiveLoginAuth? = null
-    private var listenerToken: OnReceiveToken? = null
     var auth = false;
     var token: String? = null
 
     fun onClickLogin(activity: FragmentActivity?, email: String, password: String) {
-        authLogic.authenticateUser(listenerAuth, listenerToken, email, password)
+        authLogic.authenticateUser(listenerAuth, email, password)
         Thread.sleep(60)
 
         if (auth) {
@@ -61,17 +59,9 @@ class AuthViewModel(application: Application): AndroidViewModel(application) {
         this.listenerAuth = listener
         listener.onReceiveLoginAuth(auth)
     }
-    fun registerListenerToken(listener: OnReceiveToken) {
-        this.listenerToken = listener
-        listener.onReceiveToken(token)
-    }
 
     fun unregisterListener() {
         listenerAuth = null
-    }
-
-    fun unregisterListenerToken() {
-        listenerToken = null
     }
 
     companion object {

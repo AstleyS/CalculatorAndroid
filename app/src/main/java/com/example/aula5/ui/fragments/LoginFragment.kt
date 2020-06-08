@@ -6,17 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import com.example.aula5.R
 import com.example.aula5.ui.listeners.OnReceiveLoginAuth
-import com.example.aula5.ui.listeners.OnReceiveToken
 import com.example.aula5.ui.viewmodels.AuthViewModel
 
-class LoginFragment : Fragment(), OnReceiveLoginAuth, OnReceiveToken {
+class LoginFragment : Fragment(), OnReceiveLoginAuth {
 
     private lateinit var viewModel: AuthViewModel
 
@@ -55,18 +53,15 @@ class LoginFragment : Fragment(), OnReceiveLoginAuth, OnReceiveToken {
 
     override fun onStart() {
         viewModel.registerListenerAuth(this)
-        viewModel.registerListenerToken(this)
+
         super.onStart()
     }
 
     override fun onDestroy() {
         viewModel.unregisterListener()
-        viewModel.unregisterListenerToken()
         super.onDestroy()
     }
 
     override fun onReceiveLoginAuth(boolean: Boolean) = boolean.let { viewModel.auth = it }
-
-    override fun onReceiveToken(token: String?) = token.let { viewModel.token = it }
 
 }

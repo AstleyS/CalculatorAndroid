@@ -3,6 +3,7 @@ package com.example.aula5.ui.viewmodels
 import android.app.Application
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.AndroidViewModel
+import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.data.local.room.CalculatorDatabase
 import com.example.aula5.data.remote.RetrofitBuilder
 import com.example.aula5.data.repositories.OperationRepository
@@ -21,6 +22,7 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
     private var listenerOperation: OnReceiveOperations? = null
     var token: String? = null
     var display: String = "0"
+    var listaOperacoes = mutableListOf<Operation>()
 
     fun getOperations()  {
         calculatorLogic.getAll(listenerOperation, token)
@@ -68,6 +70,7 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
 
     fun registerListenerOperation(listener: OnReceiveOperations) {
         this.listenerOperation = listener
+        listener.onReceiveOperations(listaOperacoes)
     }
 
     fun unregisterListener() {

@@ -4,7 +4,6 @@ import android.util.Log
 import com.example.aula5.data.remote.requests.Login
 import com.example.aula5.data.remote.services.AuthService
 import com.example.aula5.ui.listeners.OnReceiveLoginAuth
-import com.example.aula5.ui.listeners.OnReceiveToken
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +13,7 @@ var token : String? = null
 
 class AuthLogic(private val retrofit: Retrofit /*private val storage: UserDao*/) {
 
-    fun authenticateUser(listener: OnReceiveLoginAuth?, listenerToken: OnReceiveToken?  , email: String, password: String) {
+    fun authenticateUser(listener: OnReceiveLoginAuth?, email: String, password: String) {
 
         val service = retrofit.create(AuthService::class.java)
         CoroutineScope(Dispatchers.IO).launch {
@@ -24,7 +23,6 @@ class AuthLogic(private val retrofit: Retrofit /*private val storage: UserDao*/)
             if (response.isSuccessful) {
                 token = response.body()?.getToken
                 listener?.onReceiveLoginAuth(true);
-                listenerToken?.onReceiveToken(token)
                 Log.i(AuthLogic::class.java.simpleName, response.message())
             } else {
                 listener?.onReceiveLoginAuth(false);
