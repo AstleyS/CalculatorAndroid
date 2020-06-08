@@ -1,6 +1,6 @@
 package com.example.aula5.data.remote.services
 
-import com.example.aula5.data.remote.requests.Operation
+import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.data.remote.responses.GetOperationResponse
 import com.example.aula5.data.remote.responses.PostOperationResponse
 import retrofit2.Response

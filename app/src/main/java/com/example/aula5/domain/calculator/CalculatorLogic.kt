@@ -1,18 +1,11 @@
 package com.example.aula5.domain.calculator
 
 
-import android.util.Log
-import com.example.aula5.data.remote.requests.Operation
-import com.example.aula5.data.local.room.dao.OperationDao
-import com.example.aula5.data.remote.services.OperationService
+import com.example.aula5.data.repositories.OperationRepository
 import com.example.aula5.ui.listeners.OnReceiveOperations
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
-import retrofit2.Retrofit
 
-class CalculatorLogic(private val retrofit: Retrofit /*private val storage: OperationDao*/) {
+class CalculatorLogic(private val repository: OperationRepository /*private val retrofit: Retrofit private val storage: OperationDao*/) {
 
     fun insertSymbol(display: String, symbol: String): String {
 
@@ -60,20 +53,9 @@ class CalculatorLogic(private val retrofit: Retrofit /*private val storage: Oper
     }
 
     fun getAll(listener: OnReceiveOperations?, token: String?) {
-
-        val service = retrofit.create(OperationService::class.java)
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = service.getOperation(token)
-
-            if (response.isSuccessful) {
-                val operacoes = response.body()
-                listener?.onReceiveOperations(operacoes!!)
-                Log.i(this::class.java.simpleName, response.message())
-            } else {
-                Log.i(this::class.java.simpleName, response.message())
-            }
-        }
+        repository.getAll(listener, token)
     }
+
 
     /*
     fun performeOperation(expression: String): Double {
@@ -91,19 +73,14 @@ class CalculatorLogic(private val retrofit: Retrofit /*private val storage: Oper
         return expressionBuilder.evaluate()
     }
 
-    fun getAll(listener: OnReceiveOperations?) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val operations = storage.getAll()
-            listener?.onReceiveOperations(operations) // notifies
-        }
-    }
+
 
     fun removeOperation(operation: Operation) {
         CoroutineScope(Dispatchers.IO).launch {
             storage.removeOperation(operation)
         }
     }
-     */
+
     fun deleteOperations() {
 
         val service = retrofit.create(OperationService::class.java)
@@ -117,8 +94,8 @@ class CalculatorLogic(private val retrofit: Retrofit /*private val storage: Oper
                 Log.i(this::class.java.simpleName, response.errorBody().toString())
             }
         }
-
-    }
+        }
+     */
 
 }
 

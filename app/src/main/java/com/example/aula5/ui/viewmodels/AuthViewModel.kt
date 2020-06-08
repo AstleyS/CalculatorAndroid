@@ -27,7 +27,7 @@ class AuthViewModel(application: Application): AndroidViewModel(application) {
 
     fun onClickLogin(activity: FragmentActivity?, email: String, password: String) {
         authLogic.authenticateUser(listenerAuth, listenerToken, email, password)
-        Thread.sleep(500)
+        Thread.sleep(60)
 
         if (auth) {
             val intent = Intent(activity, MainActivity::class.java)

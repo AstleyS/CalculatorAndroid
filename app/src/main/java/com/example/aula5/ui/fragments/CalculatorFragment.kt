@@ -12,7 +12,7 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import com.example.aula5.*
-import com.example.aula5.data.remote.requests.Operation
+import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.listeners.OnDisplayChanged
 import com.example.aula5.ui.listeners.OnReceiveOperations
@@ -84,7 +84,9 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations, On
     /*************************/
     override fun onDisplayChanged(value: String?) = value.let { text_visor.text = it }
 
-    override fun onReceiveOperations(listaOperacoes: MutableList<Operation>) = listaOperacoes.let { this.listaOperacoes = it }
+    override fun onReceiveOperations(listaOperacoes: MutableList<Operation>) = listaOperacoes.let {
+        it.forEach {operation -> listaOperacoes.add(operation)}
+    }
 
     override fun onReceiveToken(token: String?) = token.let { viewModel.token = it }
 
@@ -96,7 +98,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged, OnReceiveOperations, On
     fun updateList() {
 
         viewModel.getOperations()
-        Thread.sleep(500)
+        Thread.sleep(60)
 
         if (!listaOperacoes.isEmpty()) historic?.text = listaOperacoes.get(listaOperacoes.size -1).toString()
 

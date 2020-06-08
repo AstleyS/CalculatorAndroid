@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.example.aula5.data.remote.requests.Operation
+import com.example.aula5.data.local.entities.Operation
 import com.example.aula5.R
 import com.example.aula5.ui.adapters.HistoryAdapter
 import com.example.aula5.ui.listeners.OnReceiveOperations
